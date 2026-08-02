@@ -1,6 +1,7 @@
-# Automatic data updates
+# Automatic data updates — Mir’ah / مرآة (Miraah)
 
-The dashboard is a static website. It does not need an application backend or
+Mir’ah (English) / مرآة (Arabic) is a static bilingual dashboard. Technical
+project spelling: **Miraah**. It does not need an application backend or
 database.
 
 ## Data flow

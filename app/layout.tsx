@@ -13,8 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Starter Project",
-  description: "A clean starting point for building your site.",
+  title: "Mir’ah | Compare countries through data",
+  description:
+    "Mir’ah (مرآة) — compare countries through data on quality of life, economy and happiness.",
   other: {
     "codex-preview": "development",
   },

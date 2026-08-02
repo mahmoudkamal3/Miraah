@@ -4,7 +4,7 @@ export default function Home() {
       <iframe
         className="dashboard-frame"
         src="/dashboard.html"
-        title="مرآة الدول — مقارنة جودة الحياة"
+        title="مرآة — قارن الدول بالأرقام"
       />
     </main>
   );
