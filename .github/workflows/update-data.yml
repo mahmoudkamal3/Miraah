@@ -1,0 +1,65 @@
+name: Update country data
+
+on:
+  schedule:
+    - cron: "17 5 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: country-data-update
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run updater unit tests
+        run: python -m unittest tests.test_update_world_bank -v
+
+      - name: Dry-run validation
+        run: python scripts/update_world_bank.py --dry-run
+
+      - name: Refresh World Bank data
+        run: python scripts/update_world_bank.py --write
+
+      - name: Verify generated dashboard
+        run: |
+          test -s public/index.html
+          test -s public/dashboard.html
+          cmp -s public/index.html public/dashboard.html
+          python - <<'PY'
+          from pathlib import Path
+          import sys
+          sys.path.insert(0, "scripts")
+          import update_world_bank as wb
+          html = Path("public/dashboard.html").read_text(encoding="utf-8")
+          payload = wb.read_payload(html)
+          assert "updatedAt" in payload
+          assert len(payload["indicatorMeta"]) == 12
+          assert len(payload["countries"]) >= 150
+          print("embedded DATA ok")
+          PY
+
+      - name: Commit only when data changed
+        run: |
+          if git diff --quiet -- public/index.html public/dashboard.html; then
+            echo "No data changes"
+            exit 0
+          fi
+          git config user.name "country-mirror-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add public/index.html public/dashboard.html
+          git commit -m "chore: refresh World Bank data"
+          git push

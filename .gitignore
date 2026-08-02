@@ -1,0 +1,71 @@
+# Dependencies and package manager junk
+node_modules/
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# Local / generated runtimes
+.wrangler/
+.vinext/
+.sites-runtime/
+.next/
+.vercel/
+out/
+dist/
+build/
+coverage/
+outputs/
+work/
+
+# Logs and temporary files
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local environment files and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+credentials*.json
+**/secrets/**
+.openai/
+
+# TypeScript build artifact
+next-env.d.ts
+
+# Editor / IDE
+.idea/
+.vscode/
+*.code-workspace
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+
+# OS / misc
+*.bak
+*.orig
