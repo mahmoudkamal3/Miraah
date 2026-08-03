@@ -151,7 +151,7 @@ function tooltipHtml(iso){
   if(!d)return `<strong>${esc(iso)}</strong><div class="muted">${esc(t.mapUnmapped)}</div>`;
   const name=state.lang==='ar'?d.nameAr:d.nameEn;
   const status=t.cats[d.status]||d.status;
-  return `<strong>${esc(flagEmoji(d.iso2))} ${esc(name)}</strong>
+  return `<strong class="flag-with-name">${flagImgHtml(d.iso2,name,'xs',{lazy:false})}<span class="flag-label">${esc(name)}</span></strong>
     <div>${esc(status)}</div>
     <div class="muted">${esc(t.colStay)}: ${esc(stayText(d))}</div>
     <div class="muted">${esc(regionLabel(d.region))}</div>`;
@@ -170,7 +170,7 @@ function updateMapSheet(iso){
   const name=d?(state.lang==='ar'?d.nameAr:d.nameEn):iso;
   sheet.classList.add('open');
   sheet.innerHTML=`<button type="button" class="sheet-close" id="mapSheetClose" aria-label="${esc(t.close)}">×</button>
-    <strong>${esc(d?flagEmoji(d.iso2)+' '+name:name)}</strong>
+    <strong class="flag-with-name">${d?flagImgHtml(d.iso2,name,'sm',{lazy:false}):''}<span class="flag-label">${esc(name)}</span></strong>
     <div>${esc(d?(t.cats[d.status]||d.status):t.mapUnmapped)}</div>
     <div class="muted">${esc(t.colStay)}: ${esc(stayText(d))}</div>
     <div class="muted">${esc(d?regionLabel(d.region):'—')}</div>`;

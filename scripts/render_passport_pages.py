@@ -14,6 +14,8 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import passport_core as core  # noqa: E402
 import passport_map_ui as map_ui  # noqa: E402
 import miraah_brand as brand  # noqa: E402
+import miraah_chrome as chrome  # noqa: E402
+import miraah_flags as flags  # noqa: E402
 import miraah_theme as theme  # noqa: E402
 
 CANONICAL = brand.CANONICAL_ORIGIN
@@ -26,7 +28,7 @@ PASSPORT_INDEXING_ENABLED = False  # Flip to True only after commercially review
 PASSPORT_COUNT_LABEL = 199
 TRAVEL_DESTINATION_LABEL = 198
 
-CSS = theme.THEME_CSS + r'''
+CSS = chrome.chrome_css_bundle() + r'''
 *{box-sizing:border-box}html{scroll-behavior:smooth}
 body{margin:0;background:radial-gradient(circle at 85% 0,var(--radial-a) 0,transparent 30%),radial-gradient(circle at 5% 50%,var(--radial-b) 0,transparent 28%),var(--bg);color:var(--text);font-family:Inter,"Segoe UI",Tahoma,Arial,sans-serif;min-height:100vh}
 button,input,select,a{font:inherit}
@@ -41,7 +43,7 @@ button,input,select,a{font:inherit}
 .product-nav{display:flex;gap:6px;padding:4px;border:1px solid var(--line);border-radius:14px;background:var(--surface-soft)}
 .product-nav a{text-decoration:none;color:var(--muted);padding:8px 12px;border-radius:10px;font-size:13px;font-weight:650}
 .product-nav a:hover,.product-nav a:focus-visible{color:var(--text);background:var(--hover)}
-.product-nav a.active{color:var(--text-on-brand);background:linear-gradient(135deg,var(--brand-cyan),var(--brand-blue-soft))}
+.product-nav a.active,.product-nav a[aria-current="page"]{color:var(--text-on-brand);background:linear-gradient(135deg,var(--brand-cyan),var(--brand-blue-soft))}
 .actions{display:flex;gap:8px;align-items:center}
 .btn{border:1px solid var(--line);background:var(--surface-soft);color:var(--text);padding:9px 13px;border-radius:11px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
 .btn:hover,.btn:focus-visible{border-color:var(--btn-hover-border)}
@@ -72,8 +74,8 @@ button,input,select,a{font:inherit}
 @keyframes resultsIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.results{animation:none}html{scroll-behavior:auto}}
 
-/* Passport card: ~40% illustration / 60% score */
-.passport-card{display:grid;grid-template-columns:2fr 3fr;gap:18px;align-items:stretch;background:linear-gradient(155deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:18px}
+/* Passport card: identity | score | illustration */
+.passport-card{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:18px;align-items:stretch;background:linear-gradient(155deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:18px}
 .passport-visual{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:220px}
 .score-panel{background:var(--surface-card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;gap:10px;justify-content:center}
 .score-main{display:flex;flex-direction:column;gap:4px}
@@ -97,7 +99,7 @@ button,input,select,a{font:inherit}
 pointer-events:none}
 .passport-book .passport-chip{position:relative;z-index:1;align-self:flex-end;margin-inline-end:4px;width:36px;height:28px;opacity:.92}
 .passport-book .passport-chip svg{width:100%;height:100%;display:block}
-.passport-book .passport-flag{position:relative;z-index:1;font-size:34px;line-height:1;filter:drop-shadow(0 4px 10px #0005);margin-top:2px}
+.passport-book .passport-flag{display:none}
 .passport-book .passport-emblem{position:relative;z-index:1;width:58px;height:58px;margin:4px 0 2px;filter:drop-shadow(0 2px 6px #0005)}
 .passport-book .passport-emblem svg{width:100%;height:100%;display:block}
 .passport-book .passport-country{position:relative;z-index:1;text-align:center;font-size:14px;font-weight:800;line-height:1.25;max-width:90%;text-shadow:0 2px 8px #0006;color:#f7e7b0;letter-spacing:.02em}
@@ -183,7 +185,6 @@ dialog.method-modal::backdrop{background:var(--surface-backdrop)}
 @media(max-width:900px){
   .cats,.coverage-strip,.source-summary{grid-template-columns:repeat(2,1fr)}
   .passport-card{grid-template-columns:1fr}
-  .passport-visual{order:-1;min-height:200px}
   .chart{height:420px}
 }
 @media(max-width:650px){
@@ -193,9 +194,9 @@ dialog.method-modal::backdrop{background:var(--surface-backdrop)}
   .product-nav{width:100%;overflow:auto}
   .results-counter{margin-inline-start:0;width:100%}
 }
-''' + map_ui.MAP_CSS
+''' + flags.FLAG_CSS + map_ui.MAP_CSS
 
-JS = theme.THEME_JS + r'''
+JS = theme.THEME_JS + chrome.CHROME_JS + r'''
 const $=s=>document.querySelector(s);
 const CANONICAL='https://miraah.mirapp.workers.dev/';
 const COVERAGE={passports:199,travelDestinations:198};
@@ -213,7 +214,7 @@ const T={
  ar:{
   brand:'مرآة',subtitle:'قوة جواز السفر',pageTitleLanding:'مرآة | قوة جواز السفر (تجريبي)',
   pageDescriptionLanding:'مرآة — درجة التنقل التجريبية لجوازات السفر عبر 199 جوازًا و198 وجهة سفر.',
-  navCompare:'مقارنة الدول',navPassport:'قوة جواز السفر',
+  navHome:'الرئيسية',navCompare:'مقارنة الدول',navPassport:'قوة جواز السفر',
   hero:'قوة جواز السفر، بدرجة مرآة التجريبية',lead:'اختر جواز سفر لعرض درجة التنقل في مرآة وترتيب مرآة التجريبي وفئات الدخول إلى الوجهات.',
   searchLabel:'اختر جواز السفر',search:'ابحث عن دولة',empty:'اختر جواز سفر لعرض قوة التنقل',
   clear:'مسح',toggle:'عرض قائمة الجوازات',score:'درجة التنقل في مرآة',rank:'ترتيب مرآة التجريبي',
@@ -262,7 +263,7 @@ const T={
  en:{
   brand:'Mir\u2019ah',subtitle:'Passport power',pageTitleLanding:'Mir\u2019ah | Passport power (experimental)',
   pageDescriptionLanding:'Mir\u2019ah — experimental passport mobility scores across 199 passports and 198 travel destinations.',
-  navCompare:'Country comparison',navPassport:'Passport power',
+  navHome:'Home',navCompare:'Compare countries',navPassport:'Passport power',
   hero:'Passport power with an experimental Mir\u2019ah score',lead:'Choose a passport to see the Mir\u2019ah Mobility Score, experimental Mir\u2019ah rank, and destination access categories.',
   searchLabel:'Choose a passport',search:'Search for a country',empty:'Choose a passport to explore mobility power',
   clear:'Clear',toggle:'Show passport list',score:'Mir\u2019ah Mobility Score',rank:'Experimental Mir\u2019ah rank',
@@ -315,6 +316,7 @@ const REAL_PASSPORT_COVERS_ENABLED=false;
 const state={lang:localStorage.getItem('miraahLang')||localStorage.getItem('countryMirrorLang')||'ar',query:'',open:false,activeIndex:-1,matches:[],selected:null,detail:null,index:null,meta:null,covers:null,destQuery:'',statusFilter:'all',regionFilter:'all'};
 const tr=()=>T[state.lang];
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+''' + flags.FLAG_JS + r'''
 const nameOf=p=>state.lang==='ar'?p.nameAr:p.nameEn;
 const searchBlob=p=>`${p.nameEn} ${p.nameAr} ${p.iso3}`.toLowerCase();
 function coverFor(p){
@@ -325,7 +327,6 @@ function coverFor(p){
   if(meta.emblemRightsReviewRequired)return null;
   return meta;
 }
-function flagEmoji(iso2){if(!iso2||iso2==='XK')return '🏳️';return String.fromCodePoint(...[...iso2.toUpperCase()].map(c=>127397+c.charCodeAt(0)))}
 function regionLabel(region){const map=REGION_LABELS[region];if(!map)return region||'—';return state.lang==='ar'?map.ar:map.en}
 function formatDate(iso){
   if(!iso)return '—';
@@ -463,7 +464,6 @@ function renderPassportBook(p){
       linear-gradient(160deg,${base},#070d16 128%)">
       <div class="passport-pattern" aria-hidden="true"></div>
       <div class="passport-chip" aria-hidden="true">${chipSvg()}</div>
-      <div class="passport-flag" aria-hidden="true">${esc(flagEmoji(p.iso2))}</div>
       <div class="passport-emblem" aria-hidden="true">${emblemSvg()}</div>
       <div class="passport-country">${esc(label)}</div>
       <div class="passport-label gold-type">${esc(t.passportWord)}</div>
@@ -482,10 +482,7 @@ function setStaticText(){
   document.documentElement.dir=state.lang==='ar'?'rtl':'ltr';
   $('#brandTitle').textContent=t.brand;
   $('#brandSubtitle').textContent=t.subtitle;
-  const home=$('#brandHome');if(home)home.setAttribute('aria-label',state.lang==='ar'?'العودة إلى الصفحة الرئيسية':'Back to homepage');
-  if(typeof syncThemeControls==='function')syncThemeControls();
-  $('#navCompare').textContent=t.navCompare;
-  $('#navPassport').textContent=t.navPassport;
+  if(typeof syncPlatformChrome==='function')syncPlatformChrome(state.lang);
   $('#langBtn').textContent=state.lang==='ar'?'EN':'ع';
   $('#heroTitle').textContent=t.hero;
   $('#heroLead').textContent=t.lead;
@@ -522,7 +519,7 @@ function renderSuggestions({keepIndex=false}={}){
     box.classList.add('open');
     return;
   }
-  box.innerHTML=matches.map((p,i)=>`<div class="suggestion${i===state.activeIndex?' active':''}" role="option" aria-selected="${i===state.activeIndex?'true':'false'}" data-code="${p.iso3}" data-index="${i}"><b>${esc(flagEmoji(p.iso2))} ${esc(nameOf(p))}</b><small>${esc(p.iso3)} · ${esc(tr().rank)} #${p.rank}</small></div>`).join('');
+  box.innerHTML=matches.map((p,i)=>`<div class="suggestion${i===state.activeIndex?' active':''}" role="option" aria-selected="${i===state.activeIndex?'true':'false'}" data-code="${p.iso3}" data-index="${i}"><b>${flagWithNameHtml(p.iso2,nameOf(p),'sm',{lazy:false})}</b><small>${esc(p.iso3)} · ${esc(tr().rank)} #${p.rank}</small></div>`).join('');
   box.classList.add('open');
   box.querySelectorAll('.suggestion').forEach(el=>{
     el.onmousedown=e=>{e.preventDefault();selectPassport(el.dataset.code)};
@@ -576,9 +573,17 @@ function clearPassport(){
   const panel=$('#mapPanel');if(panel)panel.hidden=true;
   setStaticText();
 }
+function renderIdentity(p){
+  const el=$('#passportIdentity');if(!el||!p)return;
+  const label=nameOf(p);
+  el.innerHTML=`<div class="flag-stage">${flagImgHtml(p.iso2,label,'hero',{lazy:false,decorative:false})}</div>`+
+    `<h3 class="identity-name">${esc(label)}</h3>`+
+    `<p class="identity-code">${esc(p.iso3)}${p.iso2?' · '+esc(String(p.iso2).toUpperCase()):''}</p>`;
+}
 function renderHero(){
   const t=tr(),p=state.selected;
   if(!p)return;
+  renderIdentity(p);
   renderPassportBook(p);
   $('#scoreValue').textContent=String(p.mobilityScore);
   $('#scoreLabel').textContent=t.score;
@@ -667,7 +672,7 @@ function renderDetail(){
       const label=state.lang==='ar'?d.nameAr:d.nameEn;
       const days=d.days!=null?`${d.days}`:'—';
       const active=mapState.selectedIso===d.iso3?' is-map-active':'';
-      return `<tr class="${active.trim()}" data-iso3="${esc(d.iso3)}"><td>${esc(flagEmoji(d.iso2))} ${esc(label)}</td><td><span class="status-pill ${esc(d.status)}">${esc(t.cats[d.status]||d.status)}</span></td><td>${esc(regionLabel(d.region))}</td><td>${esc(days)}</td></tr>`;
+      return `<tr class="${active.trim()}" data-iso3="${esc(d.iso3)}"><td>${flagWithNameHtml(d.iso2,label,'xs')}</td><td><span class="status-pill ${esc(d.status)}">${esc(t.cats[d.status]||d.status)}</span></td><td>${esc(regionLabel(d.region))}</td><td>${esc(days)}</td></tr>`;
     }).join('');
   }
   renderChart();
@@ -745,6 +750,7 @@ function setupSearch(){
 }
 async function init(){
   initThemeControls();
+  if(typeof initPlatformNav==='function')initPlatformNav();
   window.onMiraahThemeChange=function(){
     if(typeof refreshMapColors==='function')refreshMapColors();
     if(typeof renderDetail==='function'&&state.selected)renderDetail();
@@ -778,11 +784,6 @@ init();
 # Append map runtime after core JS helpers exist.
 JS = JS.replace("init();\n", map_ui.MAP_JS + "\ninit();\n", 1)
 
-
-def flag_emoji(iso2: str) -> str:
-    if not iso2 or iso2 == "XK":
-        return "🏳️"
-    return "".join(chr(127397 + ord(c)) for c in iso2.upper())
 
 
 def head_html(*, title: str, description: str, canonical: str, json_ld: dict) -> str:
@@ -829,14 +830,7 @@ def shell_body(*, asset_prefix: str, boot_iso3: str | None = None) -> str:
     )
     head = f'''<body>
 <div class="shell">
-  <header class="topbar">
-    <a class="brand" href="/" aria-label="العودة إلى الصفحة الرئيسية" id="brandHome"><span class="logo"><img class="logo-mark" src="/assets/brand/miraah-app-icon.svg" width="44" height="44" alt="" decoding="async"></span><span class="brand-text"><h1 id="brandTitle"></h1><p id="brandSubtitle"></p></span></a>
-    <nav class="product-nav" aria-label="Product">
-      <a href="/" id="navCompare"></a>
-      <a class="active" href="/passport/" id="navPassport"></a>
-    </nav>
-    <div class="actions"><div class="theme-ctl" id="themeCtl"><button type="button" class="btn theme-btn" id="themeBtn" aria-haspopup="menu" aria-expanded="false" aria-controls="themeMenu"><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg></button><div class="theme-menu" id="themeMenu" role="menu" hidden><button type="button" role="menuitemradio" data-theme-pref="light" id="themeOptLight"></button><button type="button" role="menuitemradio" data-theme-pref="dark" id="themeOptDark"></button><button type="button" role="menuitemradio" data-theme-pref="system" id="themeOptSystem"></button></div></div><button class="btn lang-btn" id="langBtn" type="button">EN</button></div>
-  </header>
+  {chrome.header_html(current="passport")}
   <section class="hero">
     <h2 id="heroTitle"></h2>
     <p class="lead" id="heroLead"></p>
@@ -857,10 +851,7 @@ def shell_body(*, asset_prefix: str, boot_iso3: str | None = None) -> str:
   <div class="empty-state" id="emptyState"><div class="empty-state-icon" aria-hidden="true">⌕</div><p id="emptyStateText"></p></div>
   <div class="results" id="results" hidden>
     <section class="passport-card">
-      <div class="passport-visual">
-        <div class="passport-book" id="passportBook" role="img" aria-label=""></div>
-        <div class="cover-attribution" id="coverAttribution" hidden></div>
-      </div>
+      <div class="passport-identity" id="passportIdentity"></div>
       <div class="score-panel">
         <div class="score-main"><strong id="scoreValue"></strong><span id="scoreLabel"></span></div>
         <div class="rank-secondary"><span id="rankLabel"></span> <b id="rankValue"></b> <span class="badge-exp"></span></div>
@@ -870,6 +861,10 @@ def shell_body(*, asset_prefix: str, boot_iso3: str | None = None) -> str:
           <button type="button" class="btn" id="methodologyBtn"></button>
           <a class="btn" id="passportPageLink" href="/passport/"></a>
         </div>
+      </div>
+      <div class="passport-visual">
+        <div class="passport-book" id="passportBook" role="img" aria-label=""></div>
+        <div class="cover-attribution" id="coverAttribution" hidden></div>
       </div>
     </section>
     <div class="coverage-strip" aria-label="Coverage">
@@ -924,6 +919,7 @@ def shell_body(*, asset_prefix: str, boot_iso3: str | None = None) -> str:
     </section>
   </div>
   <p class="source" id="footerNote"></p>
+  __PLATFORM_FOOTER__
 </div>
 <dialog class="method-modal" id="methodModal" aria-labelledby="methodModalTitle">
   <div class="inner">
@@ -947,6 +943,7 @@ def shell_body(*, asset_prefix: str, boot_iso3: str | None = None) -> str:
 {boot}
 <script src="{asset_prefix}passport.js"></script>
 </body></html>'''
+    tail = tail.replace("__PLATFORM_FOOTER__", chrome.footer_html())
     return head + map_ui.map_panel_html() + tail
 
 
@@ -1021,7 +1018,7 @@ def render_passport_page(passport: dict) -> str:
 
 def write_sitemap(passports: list[dict]) -> None:
     # Passport routes stay out of the sitemap until PASSPORT_INDEXING_ENABLED is flipped.
-    urls = [CANONICAL]
+    urls = [CANONICAL, f"{CANONICAL}compare/"]
     if PASSPORT_INDEXING_ENABLED:
         urls.append(f"{CANONICAL}passport/")
         urls.extend(f"{CANONICAL}passport/{p['slug']}/" for p in passports)
@@ -1030,7 +1027,12 @@ def write_sitemap(passports: list[dict]) -> None:
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
     ]
     for index, url in enumerate(urls):
-        priority = "1.0" if index == 0 else ("0.9" if index == 1 else "0.7")
+        if index == 0:
+            priority = "1.0"
+        elif index == 1:
+            priority = "0.9"
+        else:
+            priority = "0.7"
         parts.append("  <url>")
         parts.append(f"    <loc>{url}</loc>")
         parts.append("    <changefreq>monthly</changefreq>")
@@ -1042,6 +1044,8 @@ def write_sitemap(passports: list[dict]) -> None:
 
 
 def main() -> int:
+    from sync_flag_assets import main as sync_flags
+    sync_flags()
     if not DATA_INDEX.is_file() or not DATA_META.is_file():
         raise SystemExit("Missing public/data/passports/*.json — run update_passport_data.py --write first")
     index = json.loads(DATA_INDEX.read_text(encoding="utf-8"))
@@ -1069,7 +1073,7 @@ def main() -> int:
     write_sitemap(passports)
     print(f"rendered landing + {len(passports)} passport pages")
     print(f"passport_indexing_enabled={PASSPORT_INDEXING_ENABLED}")
-    print(f"sitemap urls={1 if not PASSPORT_INDEXING_ENABLED else len(passports) + 2}")
+    print(f"sitemap urls={2 if not PASSPORT_INDEXING_ENABLED else len(passports) + 3}")
     return 0
 
 

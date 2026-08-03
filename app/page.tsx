@@ -3,7 +3,7 @@ export default function Home() {
     <main className="app-shell">
       <iframe
         className="dashboard-frame"
-        src="/dashboard.html"
+        src="/compare/"
         title="مرآة — قارن الدول بالأرقام"
       />
     </main>

@@ -123,16 +123,19 @@ class PassportPagesTests(unittest.TestCase):
         sitemap = (ROOT / "public" / "sitemap.xml").read_text(encoding="utf-8")
         self.assertIn("https://miraah.mirapp.workers.dev/</loc>", sitemap)
         self.assertNotIn("/passport/", sitemap)
-        self.assertEqual(sitemap.count("<url>"), 1)
+        self.assertEqual(sitemap.count("<url>"), 2)
+        self.assertIn("/compare/", sitemap)
 
     def test_homepage_remains_index_follow(self) -> None:
         home = (ROOT / "public" / "index.html").read_text(encoding="utf-8")
         self.assertIn('name="robots" content="index, follow"', home)
 
-    def test_dashboard_files_remain_byte_identical(self) -> None:
-        a = (ROOT / "public" / "index.html").read_bytes()
+    def test_compare_dashboard_files_remain_byte_identical(self) -> None:
+        a = (ROOT / "public" / "compare" / "index.html").read_bytes()
         b = (ROOT / "public" / "dashboard.html").read_bytes()
         self.assertEqual(a, b)
+        self.assertNotEqual((ROOT / "public" / "index.html").read_bytes(), b)
+
 
     def test_score_and_category_invariants_for_all_passports(self) -> None:
         by_code = ROOT / "public" / "data" / "passports" / "by-code"

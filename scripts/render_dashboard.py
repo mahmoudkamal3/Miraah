@@ -8,13 +8,14 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import miraah_brand as brand  # noqa: E402
+import miraah_chrome as chrome  # noqa: E402
 import miraah_theme as theme  # noqa: E402
 
-TARGET = ROOT / "public" / "dashboard.html"
-INDEX = ROOT / "public" / "index.html"
+COMPARE = ROOT / "public" / "compare" / "index.html"
+TARGET = ROOT / "public" / "dashboard.html"  # alias of /compare/
 
 
-CSS = theme.THEME_CSS + r'''
+CSS = chrome.chrome_css_bundle() + r'''
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 85% 0,var(--radial-a) 0,transparent 30%),radial-gradient(circle at 5% 50%,var(--radial-b) 0,transparent 28%),var(--bg);color:var(--text);font-family:Inter,"Segoe UI",Tahoma,Arial,sans-serif;min-height:100vh}button,input,select{font:inherit}.shell{max-width:1480px;margin:auto;padding:22px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px;flex-wrap:wrap}.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}.logo{width:44px;height:44px;border-radius:14px;overflow:hidden;flex-shrink:0;box-shadow:0 8px 30px var(--glow-brand);display:block;padding:0;background:transparent}.logo-mark{width:44px;height:44px;display:block}.brand-text{display:flex;flex-direction:column}.brand h1{margin:0;font-size:22px;font-weight:700;letter-spacing:-.02em;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}.brand p{margin:4px 0 0;color:var(--muted);font-size:12px}.product-nav{display:flex;gap:6px;padding:4px;border:1px solid var(--line);border-radius:14px;background:var(--surface-soft)}.product-nav-link{text-decoration:none;color:var(--muted);padding:8px 12px;border-radius:10px;font-size:13px;font-weight:650}.product-nav-link:hover,.product-nav-link:focus-visible{color:var(--text);background:var(--hover)}.product-nav-link.active{color:var(--text-on-brand);background:linear-gradient(135deg,var(--brand-cyan),var(--brand-blue-soft))}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:var(--surface-soft);color:var(--text);padding:9px 13px;border-radius:11px;cursor:pointer}.btn:hover,.btn:focus-visible{border-color:var(--btn-hover-border)}.lang-btn{min-width:48px;font-weight:800;color:var(--text-on-brand);background:linear-gradient(135deg,var(--brand-cyan),var(--brand-blue-soft));border:0}.hero{background:linear-gradient(135deg,var(--surface-hero-a),var(--surface-hero-b));border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:var(--shadow);position:relative;overflow:visible}.hero:after{content:"";position:absolute;width:240px;height:240px;border-radius:50%;background:var(--glow-soft);inset-inline-start:-70px;top:-90px;pointer-events:none;z-index:0}.hero-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-end;position:relative;z-index:1}.hero h2{margin:0 0 8px;font-size:26px}.hero .lead{color:var(--muted);margin:0;max-width:700px;line-height:1.7}.selectors{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center;margin-top:24px;position:relative;z-index:40}.country-select{background:var(--surface-card);border:1px solid var(--line);border-top:3px solid var(--country-color);padding:15px;border-radius:16px;position:relative;z-index:1;overflow:visible}.country-select label{display:block;color:var(--muted);font-size:12px;margin-bottom:8px}.search-wrap{position:relative;z-index:2}.country-search,.metric-select{width:100%;background:var(--input-bg);color:var(--text);border:1px solid var(--border-input);border-radius:10px;outline:none}.country-search{padding-block:12px;padding-inline:40px 72px}.metric-select{padding:12px}.country-search:focus,.metric-select:focus{border-color:var(--country-color,var(--a));box-shadow:0 0 0 3px var(--focus)}.search-icon{position:absolute;inset-inline-start:13px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none;z-index:1}.field-actions{position:absolute;inset-inline-end:6px;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:1px;z-index:2}.clear-btn,.chevron-btn{border:0;background:transparent;color:var(--muted);cursor:pointer;padding:4px 7px;line-height:1;border-radius:6px}.clear-btn{font-size:16px;display:none}.clear-btn.visible{display:block}.clear-btn:hover,.chevron-btn:hover{color:var(--text);background:var(--vs-bg)}.chevron-btn{font-size:11px;padding:5px 7px}.chevron-btn.open{color:var(--text)}.suggestions{position:absolute;top:calc(100% + 6px);inset-inline:0;background:var(--input-bg);border:1px solid var(--border-strong);border-radius:12px;max-height:260px;overflow-y:auto;overflow-x:hidden;z-index:100;box-shadow:var(--shadow);display:none}.suggestions.open{display:block}.suggestion{padding:10px 12px;cursor:pointer;border-bottom:1px solid var(--border)}.suggestion:last-child{border-bottom:0}.suggestion:hover,.suggestion.active{background:var(--hover)}.suggestion.disabled{opacity:.45;cursor:not-allowed}.suggestion small{display:block;color:var(--muted);font-size:10px;margin-top:3px}.vs{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--vs-bg);color:var(--vs-text);font-weight:800}.identity{display:flex;justify-content:space-between;gap:8px;margin-top:9px;font-size:12px;color:var(--muted)}
 .empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:44px 16px 20px;color:var(--muted);text-align:center}.empty-state[hidden]{display:none}.empty-state-icon{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--table-head);border:1px solid var(--line);color:var(--a);font-size:15px}.empty-state p{margin:0;font-size:14px;line-height:1.6;max-width:420px}.dashboard-content{display:none}.dashboard-content.visible{display:block;animation:resultsIn .42s ease}@keyframes resultsIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 .section-title{display:flex;justify-content:space-between;align-items:end;margin:28px 2px 12px}.section-title h3{margin:0;font-size:17px}.section-title span{color:var(--muted);font-size:12px}.kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}.kpi{background:linear-gradient(155deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:16px;padding:16px;min-height:140px;position:relative;overflow:hidden;display:flex;flex-direction:column}.kpi-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;min-height:40px;margin-bottom:2px}.kpi .label{flex:1 1 auto;min-width:0;font-size:12px;color:var(--muted);line-height:1.35;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;text-align:start}.kpi .values{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:auto;padding-top:10px}.kpi .value{font-size:18px;font-weight:800;direction:ltr;text-align:center}.kpi .year{font-size:10px;color:var(--muted);margin-top:3px;text-align:center}.winner{flex-shrink:0;white-space:nowrap;max-width:46%;overflow:hidden;text-overflow:ellipsis;font-size:10px;padding:3px 7px;border-radius:10px;background:var(--winner-bg);color:var(--a);line-height:1.3}
@@ -25,14 +26,12 @@ CSS = theme.THEME_CSS + r'''
 
 BODY = r'''
 <div class="shell">
-  <header class="topbar">
-    <a class="brand" href="/" aria-label="العودة إلى الصفحة الرئيسية" id="brandHome"><span class="logo"><img class="logo-mark" src="/assets/brand/miraah-app-icon.svg" width="44" height="44" alt="" decoding="async"></span><span class="brand-text"><h1 id="brandTitle"></h1><p id="brandSubtitle"></p></span></a>
-    <nav class="product-nav" aria-label="Product">
-      <a class="product-nav-link active" href="./" id="navCompare"></a>
-      <a class="product-nav-link" href="./passport/" id="navPassport"></a>
-    </nav>
-    <div class="actions"><div class="theme-ctl" id="themeCtl"><button type="button" class="btn theme-btn" id="themeBtn" aria-haspopup="menu" aria-expanded="false" aria-controls="themeMenu"><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg></button><div class="theme-menu" id="themeMenu" role="menu" hidden><button type="button" role="menuitemradio" data-theme-pref="light" id="themeOptLight"></button><button type="button" role="menuitemradio" data-theme-pref="dark" id="themeOptDark"></button><button type="button" role="menuitemradio" data-theme-pref="system" id="themeOptSystem"></button></div></div><button class="btn lang-btn" id="langBtn" aria-label="Switch language">EN</button><button class="btn" id="swapBtn"></button><button class="btn" id="exportBtn"></button></div>
-  </header>
+<header class="topbar platform-header">
+  <a class="brand" href="/" aria-label="العودة إلى الصفحة الرئيسية" id="brandHome"><span class="logo"><img class="logo-mark" src="/assets/brand/miraah-app-icon.svg" width="44" height="44" alt="" decoding="async"></span><span class="brand-text"><h1 id="brandTitle"></h1><p id="brandSubtitle"></p></span></a>
+  <button type="button" class="nav-toggle" id="navToggle" aria-controls="productNav" aria-expanded="false" aria-label="Open menu">☰</button>
+  <nav class="product-nav" id="productNav" aria-label="Primary"><a href="/" id="navHome"></a><a href="/compare/" id="navCompare" aria-current="page" class="active"></a><a href="/passport/" id="navPassport"></a></nav>
+  <div class="platform-actions actions"><div class="theme-ctl" id="themeCtl"><button type="button" class="btn theme-btn" id="themeBtn" aria-haspopup="menu" aria-expanded="false" aria-controls="themeMenu"><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg></button><div class="theme-menu" id="themeMenu" role="menu" hidden><button type="button" role="menuitemradio" data-theme-pref="light" id="themeOptLight"></button><button type="button" role="menuitemradio" data-theme-pref="dark" id="themeOptDark"></button><button type="button" role="menuitemradio" data-theme-pref="system" id="themeOptSystem"></button></div></div><button class="btn lang-btn" id="langBtn" type="button" aria-label="Switch language">EN</button><button class="btn" id="swapBtn"></button><button class="btn" id="exportBtn"></button></div>
+</header>
   <section class="hero" id="comparisonHero">
     <div class="hero-head"><div><h2 id="heroTitle"></h2><p class="lead" id="heroLead"></p></div><div class="legend" id="heroLegend"></div></div>
     <div class="selectors">
@@ -54,18 +53,47 @@ BODY = r'''
     <section class="panel"><div class="panel-head"><h4 id="rankingTitle"></h4><select class="metric-select" id="rankMetric"></select></div><div class="table-wrap"><table><thead><tr id="tableHead"></tr></thead><tbody id="rankingBody"></tbody></table></div></section>
   </div>
   <p class="source"><strong id="freshness"></strong><br><span id="sourceText"></span></p>
+  <footer class="platform-footer" id="platformFooter">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="/assets/brand/miraah-app-icon.svg" width="40" height="40" alt="" decoding="async">
+      <div>
+        <strong id="footerBrandName"></strong>
+        <p id="footerDesc" style="margin:0"></p>
+      </div>
+    </div>
+    <div>
+      <strong id="footerExploreLabel"></strong>
+      <ul>
+        <li><a href="/" id="footerHome"></a></li>
+        <li><a href="/compare/" id="footerCompare"></a></li>
+        <li><a href="/passport/" id="footerPassport"></a></li>
+        <li><a href="/passport/" id="footerMethodLink"></a></li><li><a href="/passport/image-attributions.html" id="footerAttrLink"></a></li>
+      </ul>
+    </div>
+    <div>
+      <strong id="footerSourcesLabel"></strong>
+      <p id="footerCompareSources" style="margin:0 0 10px"></p>
+      <p id="footerPassportSources" style="margin:0"></p>
+    </div>
+  </div>
+  <div class="footer-copy">
+    <p id="footerDisclaimer" style="margin:0 0 8px"></p>
+    <p style="margin:0"><span id="footerBrandInline"></span> · <span id="footerYear">2026</span></p>
+  </div>
+</footer>
 </div><div class="tooltip" id="tooltip"></div>
 '''
 
 
-JS = theme.THEME_JS + r'''
+JS = theme.THEME_JS + chrome.CHROME_JS + r'''
 const $=s=>document.querySelector(s);
 let A='#38d6b0', B='#ffb15c', MUTED='#8fa6bf', GRID='#203752', PLOT_STROKE='#07111f';
 function refreshChartColors(){const p=chartPalette();A=p.A;B=p.B;MUTED=p.MUTED;GRID=p.GRID;PLOT_STROKE=p.STROKE}
 /* Export note: comparison export is CSV data only — theme-independent, no visual capture. */
 const T={
- ar:{brand:'مرآة',subtitle:'قارن الدول بالأرقام',pageTitle:'مرآة | قارن الدول بالأرقام',pageDescription:'مرآة — قارن الدول بالأرقام عبر مؤشرات جودة الحياة والاقتصاد والسعادة.',navCompare:'مقارنة الدول',navPassport:'قوة جواز السفر',swap:'⇄ تبديل',export:'↓ تصدير المقارنة',hero:'قارن الحياة بالأرقام، مش بالانطباعات',lead:'اختر دولتين وشاهد أحدث بيانات متاحة مع السنة، الاتجاه التاريخي، مركز السعادة، وترتيب الدول عالميًا.',first:'الدولة الأولى',second:'الدولة الثانية',search:'ابحث عن دولة',quick:'لقطة سريعة',quickNote:'أحدث قيمة متاحة لكل مؤشر — السنة موضحة أسفل الرقم',trends:'الاتجاهات والصورة المتكاملة',trendsNote:'الفترة 2000–2025 حسب توافر البيانات',trendPanel:'التغير عبر الزمن',radar:'مقارنة معيارية متعددة المحاور',radarNote:'الدرجة من 100 مقارنةً بجميع الدول ذات البيانات. البطالة والقتل يُعكسان: الأقل يحصل على درجة أعلى.',happy:'السعادة والرضا عن الحياة',happyNote:'World Happiness Report 2026 — متوسطات ثلاث سنوات حتى 2025',ranking:'الترتيب العالمي',rankingNote:'اختر المؤشر لاستكشاف موقع الدولتين وسط العالم',rankTitle:'الترتيب العالمي',noData:'لا توجد بيانات',better:'أفضل',year:'السنة',value:'القيمة',country:'الدولة',group:'المجموعة',relative:'الموقع النسبي',indicator:'المؤشر',updated:'آخر تحديث تلقائي لبيانات World Bank',source:'المصادر: World Development Indicators (World Bank) وWorld Happiness Report 2026. قد تختلف أحدث سنة بين المؤشرات والدول؛ لذلك تُعرض سنة كل قيمة صراحة. بيانات PPP مناسبة للمقارنة الدولية لكنها لا تمثل راتب وظيفة بعينها.',happiness:'السعادة والرضا',rank:'الترتيب',emptyStart:'اختر دولتين لبدء المقارنة',emptyOneMore:'اختر دولة أخرى لبدء المقارنة',otherSelected:'مختارة في الجانب الآخر',factors:['الدخل','الدعم الاجتماعي','الصحة','حرية الاختيار','الكرم','انخفاض الفساد'],axes:['السعادة','العمر','الدخل','الإنترنت','العمل','الأمان']},
- en:{brand:'Mir\u2019ah',subtitle:'Compare countries through data',pageTitle:'Mir\u2019ah | Compare countries through data',pageDescription:'Mir\u2019ah — compare countries through data on quality of life, economy and happiness.',navCompare:'Country comparison',navPassport:'Passport power',swap:'⇄ Swap',export:'↓ Export comparison',hero:'Compare life with data, not impressions',lead:'Choose two countries and explore the latest values, historical trends, happiness scores and global rankings.',first:'First country',second:'Second country',search:'Search for a country',quick:'Quick snapshot',quickNote:'Latest available value for each indicator — source year shown below',trends:'Trends and the bigger picture',trendsNote:'2000–2025, subject to data availability',trendPanel:'Change over time',radar:'Standardized multi-axis comparison',radarNote:'Scores are percentiles across countries with available data. Unemployment and homicide are reversed: lower is better.',happy:'Happiness and life satisfaction',happyNote:'World Happiness Report 2026 — three-year averages through 2025',ranking:'Global ranking',rankingNote:'Choose an indicator to see where both countries stand',rankTitle:'Global ranking',noData:'No data',better:'better',year:'Data year',value:'Value',country:'Country',group:'Income group',relative:'Relative position',indicator:'Indicator',updated:'World Bank data last refreshed',source:'Sources: World Development Indicators (World Bank) and World Happiness Report 2026. Latest years can differ by indicator and country, so every value shows its source year. PPP data supports international comparison but does not represent a job salary.',happiness:'Happiness & satisfaction',rank:'rank',emptyStart:'Choose two countries to start the comparison',emptyOneMore:'Choose one more country to start the comparison',otherSelected:'selected on the other side',factors:['Income','Social support','Health','Freedom of choice','Generosity','Low corruption'],axes:['Happiness','Longevity','Income','Internet','Employment','Safety']}
+ ar:{brand:'مرآة',subtitle:'قارن الدول بالأرقام',pageTitle:'مرآة | قارن الدول بالأرقام',pageDescription:'مرآة — قارن الدول بالأرقام عبر مؤشرات جودة الحياة والاقتصاد والسعادة.',navHome:'الرئيسية',navCompare:'مقارنة الدول',navPassport:'قوة جواز السفر',swap:'⇄ تبديل',export:'↓ تصدير المقارنة',hero:'قارن الحياة بالأرقام، مش بالانطباعات',lead:'اختر دولتين وشاهد أحدث بيانات متاحة مع السنة، الاتجاه التاريخي، مركز السعادة، وترتيب الدول عالميًا.',first:'الدولة الأولى',second:'الدولة الثانية',search:'ابحث عن دولة',quick:'لقطة سريعة',quickNote:'أحدث قيمة متاحة لكل مؤشر — السنة موضحة أسفل الرقم',trends:'الاتجاهات والصورة المتكاملة',trendsNote:'الفترة 2000–2025 حسب توافر البيانات',trendPanel:'التغير عبر الزمن',radar:'مقارنة معيارية متعددة المحاور',radarNote:'الدرجة من 100 مقارنةً بجميع الدول ذات البيانات. البطالة والقتل يُعكسان: الأقل يحصل على درجة أعلى.',happy:'السعادة والرضا عن الحياة',happyNote:'World Happiness Report 2026 — متوسطات ثلاث سنوات حتى 2025',ranking:'الترتيب العالمي',rankingNote:'اختر المؤشر لاستكشاف موقع الدولتين وسط العالم',rankTitle:'الترتيب العالمي',noData:'لا توجد بيانات',better:'أفضل',year:'السنة',value:'القيمة',country:'الدولة',group:'المجموعة',relative:'الموقع النسبي',indicator:'المؤشر',updated:'آخر تحديث تلقائي لبيانات World Bank',source:'المصادر: World Development Indicators (World Bank) وWorld Happiness Report 2026. قد تختلف أحدث سنة بين المؤشرات والدول؛ لذلك تُعرض سنة كل قيمة صراحة. بيانات PPP مناسبة للمقارنة الدولية لكنها لا تمثل راتب وظيفة بعينها.',happiness:'السعادة والرضا',rank:'الترتيب',emptyStart:'اختر دولتين لبدء المقارنة',emptyOneMore:'اختر دولة أخرى لبدء المقارنة',otherSelected:'مختارة في الجانب الآخر',factors:['الدخل','الدعم الاجتماعي','الصحة','حرية الاختيار','الكرم','انخفاض الفساد'],axes:['السعادة','العمر','الدخل','الإنترنت','العمل','الأمان']},
+ en:{brand:'Mir\u2019ah',subtitle:'Compare countries through data',pageTitle:'Mir\u2019ah | Compare countries through data',pageDescription:'Mir\u2019ah — compare countries through data on quality of life, economy and happiness.',navHome:'Home',navCompare:'Compare countries',navPassport:'Passport power',swap:'⇄ Swap',export:'↓ Export comparison',hero:'Compare life with data, not impressions',lead:'Choose two countries and explore the latest values, historical trends, happiness scores and global rankings.',first:'First country',second:'Second country',search:'Search for a country',quick:'Quick snapshot',quickNote:'Latest available value for each indicator — source year shown below',trends:'Trends and the bigger picture',trendsNote:'2000–2025, subject to data availability',trendPanel:'Change over time',radar:'Standardized multi-axis comparison',radarNote:'Scores are percentiles across countries with available data. Unemployment and homicide are reversed: lower is better.',happy:'Happiness and life satisfaction',happyNote:'World Happiness Report 2026 — three-year averages through 2025',ranking:'Global ranking',rankingNote:'Choose an indicator to see where both countries stand',rankTitle:'Global ranking',noData:'No data',better:'better',year:'Data year',value:'Value',country:'Country',group:'Income group',relative:'Relative position',indicator:'Indicator',updated:'World Bank data last refreshed',source:'Sources: World Development Indicators (World Bank) and World Happiness Report 2026. Latest years can differ by indicator and country, so every value shows its source year. PPP data supports international comparison but does not represent a job salary.',happiness:'Happiness & satisfaction',rank:'rank',emptyStart:'Choose two countries to start the comparison',emptyOneMore:'Choose one more country to start the comparison',otherSelected:'selected on the other side',factors:['Income','Social support','Health','Freedom of choice','Generosity','Low corruption'],axes:['Happiness','Longevity','Income','Internet','Employment','Safety']}
 };
 const arabicNames={EGY:'مصر',MLT:'مالطا',ESP:'إسبانيا',DEU:'ألمانيا',NLD:'هولندا',ITA:'إيطاليا',FRA:'فرنسا',GBR:'المملكة المتحدة',USA:'الولايات المتحدة',CAN:'كندا',AUS:'أستراليا',ARE:'الإمارات',SAU:'السعودية',QAT:'قطر',TUR:'تركيا',PRT:'البرتغال',GRC:'اليونان',CHE:'سويسرا',SWE:'السويد',NOR:'النرويج',DNK:'الدنمارك',FIN:'فنلندا',IRL:'أيرلندا',BEL:'بلجيكا',AUT:'النمسا',POL:'بولندا',CZE:'التشيك',HUN:'المجر',ROU:'رومانيا',MAR:'المغرب',TUN:'تونس',JOR:'الأردن',LBN:'لبنان',KWT:'الكويت',BHR:'البحرين',OMN:'عمان',JPN:'اليابان',KOR:'كوريا الجنوبية',SGP:'سنغافورة',NZL:'نيوزيلندا',CHN:'الصين',IND:'الهند',PAK:'باكستان',DZA:'الجزائر',IRQ:'العراق',SYR:'سوريا',LBY:'ليبيا',SDN:'السودان',YEM:'اليمن',PSE:'فلسطين',CYP:'قبرص',ISL:'آيسلندا',LUX:'لوكسمبورغ',BRA:'البرازيل',ARG:'الأرجنتين',MEX:'المكسيك',ZAF:'جنوب أفريقيا'};
 const metricEN={life_expectancy:['Life expectancy','years'],gdp_ppp:['GDP per capita — PPP','international $'],gni_ppp:['GNI per capita — PPP','international $'],unemployment:['Unemployment','%'],inflation:['Inflation','%'],internet:['Internet use','%'],homicides:['Homicides per 100,000','per 100,000'],health_spend:['Health spending per capita — PPP','international $'],labor_participation:['Labor force participation','%'],urban_population:['Urban population','%'],renewable_energy:['Renewable energy use','%'],population:['Population','people']};
@@ -106,11 +134,11 @@ function setupSearch(side){const input=$(`#countrySearch${side}`),clear=$(`#clea
 function renderMetaOnly(){[['A',state.a],['B',state.b]].forEach(([x,c])=>{$(`#countryCard${x}`).style.setProperty('--country-color',slotColor(x));if(c&&DATA.countries[c]){const d=DATA.countries[c];$(`#meta${x}`).innerHTML=`<span>${esc(d.region||'—')}</span><span>${esc(d.income||'—')}</span>`}else{$(`#meta${x}`).innerHTML='<span>—</span><span>—</span>'}});$('#heroLegend').innerHTML=bothReady()?legendHtml():''}
 function updateEmptyState(){const empty=$('#emptyState'),dash=$('#dashboardContent'),ready=bothReady(),count=selectedCount();if(ready){empty.hidden=true;if(!state.wasReady){dash.classList.remove('visible');void dash.offsetWidth}dash.classList.add('visible');state.wasReady=true;return}state.wasReady=false;dash.classList.remove('visible');empty.hidden=false;$('#emptyStateText').textContent=count===1?tr().emptyOneMore:tr().emptyStart}
 function setMetaBy(attr,key,value){let el=document.querySelector(`meta[${attr}="${key}"]`);if(!el){el=document.createElement('meta');el.setAttribute(attr,key);document.head.appendChild(el)}el.setAttribute('content',value)}
-function syncSeoMeta(){const t=tr(),locale=state.lang==='ar'?'ar_AR':'en_US',ogImage='https://miraah.mirapp.workers.dev/assets/brand/miraah-social-card.png',logo='https://miraah.mirapp.workers.dev/assets/brand/miraah-app-icon.svg';document.title=t.pageTitle;setMetaBy('name','description',t.pageDescription);setMetaBy('property','og:title',t.pageTitle);setMetaBy('property','og:description',t.pageDescription);setMetaBy('property','og:locale',locale);setMetaBy('property','og:image',ogImage);setMetaBy('name','twitter:title',t.pageTitle);setMetaBy('name','twitter:description',t.pageDescription);setMetaBy('name','twitter:image',ogImage);const ld=document.getElementById('miraah-jsonld');if(ld){ld.textContent=JSON.stringify({"@context":"https://schema.org","@type":"WebApplication","name":t.brand,"alternateName":state.lang==='ar'?'Mir\u2019ah':'مرآة',"url":"https://miraah.mirapp.workers.dev/","description":t.pageDescription,"applicationCategory":"BusinessApplication","operatingSystem":"Any","inLanguage":["ar","en"],"image":ogImage,"logo":logo,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}})}}
-function setStaticText(){const t=tr();document.documentElement.lang=state.lang;document.documentElement.dir=state.lang==='ar'?'rtl':'ltr';syncSeoMeta();$('#brandTitle').textContent=t.brand;$('#brandSubtitle').textContent=t.subtitle;const home=$('#brandHome');if(home)home.setAttribute('aria-label',state.lang==='ar'?'العودة إلى الصفحة الرئيسية':'Back to homepage');if(typeof syncThemeControls==='function')syncThemeControls();$('#navCompare').textContent=t.navCompare;$('#navPassport').textContent=t.navPassport;$('#swapBtn').textContent=t.swap;$('#exportBtn').textContent=t.export;$('#langBtn').textContent=state.lang==='ar'?'EN':'ع';$('#heroTitle').textContent=t.hero;$('#heroLead').textContent=t.lead;$('#labelA').textContent=t.first;$('#labelB').textContent=t.second;$('#countrySearchA').placeholder=t.search;$('#countrySearchB').placeholder=t.search;$('#quickTitle').textContent=t.quick;$('#quickNote').textContent=t.quickNote;$('#trendsTitle').textContent=t.trends;$('#trendsNote').textContent=t.trendsNote;$('#trendPanelTitle').textContent=t.trendPanel;$('#radarTitle').textContent=t.radar;$('#radarNote').textContent=t.radarNote;$('#happyTitle').textContent=t.happy;$('#happyNote').textContent=t.happyNote;$('#rankingSection').textContent=t.ranking;$('#rankingNote').textContent=t.rankingNote;$('#sourceText').textContent=t.source;$('#freshness').textContent=DATA.updatedAt?`${t.updated}: ${DATA.updatedAt.slice(0,10)}`:'';$('#chevronA').setAttribute('aria-label',state.lang==='ar'?'عرض قائمة الدول':'Toggle country list');$('#chevronB').setAttribute('aria-label',state.lang==='ar'?'عرض قائمة الدول':'Toggle country list');$('#clearA').setAttribute('aria-label',state.lang==='ar'?'مسح':'Clear');$('#clearB').setAttribute('aria-label',state.lang==='ar'?'مسح':'Clear')}
+function syncSeoMeta(){const t=tr(),locale=state.lang==='ar'?'ar_AR':'en_US',ogImage='https://miraah.mirapp.workers.dev/assets/brand/miraah-social-card.png',logo='https://miraah.mirapp.workers.dev/assets/brand/miraah-app-icon.svg';document.title=t.pageTitle;setMetaBy('name','description',t.pageDescription);setMetaBy('property','og:title',t.pageTitle);setMetaBy('property','og:description',t.pageDescription);setMetaBy('property','og:locale',locale);setMetaBy('property','og:image',ogImage);setMetaBy('name','twitter:title',t.pageTitle);setMetaBy('name','twitter:description',t.pageDescription);setMetaBy('name','twitter:image',ogImage);const ld=document.getElementById('miraah-jsonld');if(ld){ld.textContent=JSON.stringify({"@context":"https://schema.org","@type":"WebApplication","name":t.brand,"alternateName":state.lang==='ar'?'Mir\u2019ah':'مرآة',"url":"https://miraah.mirapp.workers.dev/compare/","description":t.pageDescription,"applicationCategory":"BusinessApplication","operatingSystem":"Any","inLanguage":["ar","en"],"image":ogImage,"logo":logo,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}})}}
+function setStaticText(){const t=tr();document.documentElement.lang=state.lang;document.documentElement.dir=state.lang==='ar'?'rtl':'ltr';syncSeoMeta();$('#brandTitle').textContent=t.brand;$('#brandSubtitle').textContent=t.subtitle;if(typeof syncPlatformChrome==='function')syncPlatformChrome(state.lang);$('#swapBtn').textContent=t.swap;$('#exportBtn').textContent=t.export;$('#langBtn').textContent=state.lang==='ar'?'EN':'ع';$('#heroTitle').textContent=t.hero;$('#heroLead').textContent=t.lead;$('#labelA').textContent=t.first;$('#labelB').textContent=t.second;$('#countrySearchA').placeholder=t.search;$('#countrySearchB').placeholder=t.search;$('#quickTitle').textContent=t.quick;$('#quickNote').textContent=t.quickNote;$('#trendsTitle').textContent=t.trends;$('#trendsNote').textContent=t.trendsNote;$('#trendPanelTitle').textContent=t.trendPanel;$('#radarTitle').textContent=t.radar;$('#radarNote').textContent=t.radarNote;$('#happyTitle').textContent=t.happy;$('#happyNote').textContent=t.happyNote;$('#rankingSection').textContent=t.ranking;$('#rankingNote').textContent=t.rankingNote;$('#sourceText').textContent=t.source;$('#freshness').textContent=DATA.updatedAt?`${t.updated}: ${DATA.updatedAt.slice(0,10)}`:'';$('#chevronA').setAttribute('aria-label',state.lang==='ar'?'عرض قائمة الدول':'Toggle country list');$('#chevronB').setAttribute('aria-label',state.lang==='ar'?'عرض قائمة الدول':'Toggle country list');$('#clearA').setAttribute('aria-label',state.lang==='ar'?'مسح':'Clear');$('#clearB').setAttribute('aria-label',state.lang==='ar'?'مسح':'Clear')}
 function metricOptions(includeHappy=false){return Object.keys(DATA.indicatorMeta).filter(k=>k!=='population').map(k=>`<option value="${k}">${esc(meta(k).label)}</option>`).join('')+(includeHappy?`<option value="happiness">${tr().happiness}</option>`:'')}
 window.onMiraahThemeChange=function(){refreshChartColors();if(typeof render==='function')render()};
-function init(){refreshChartColors();initThemeControls();setupSearch('A');setupSearch('B');$('#swapBtn').onclick=swapCountries;$('#exportBtn').onclick=exportComparison;$('#langBtn').onclick=()=>{state.lang=state.lang==='ar'?'en':'ar';localStorage.setItem('miraahLang',state.lang);localStorage.removeItem('countryMirrorLang');if(state.a)state.queryA=name(state.a);if(state.b)state.queryB=name(state.b);syncInput('A');syncInput('B');render()};$('#trendMetric').onchange=e=>{state.trend=e.target.value;if(bothReady())renderTrend()};$('#rankMetric').onchange=e=>{state.rank=e.target.value;if(bothReady())renderRanking()};window.addEventListener('resize',()=>{if(bothReady()){renderTrend();renderRadar()}});render()}
+function init(){refreshChartColors();initThemeControls();if(typeof initPlatformNav==='function')initPlatformNav();setupSearch('A');setupSearch('B');$('#swapBtn').onclick=swapCountries;$('#exportBtn').onclick=exportComparison;$('#langBtn').onclick=()=>{state.lang=state.lang==='ar'?'en':'ar';localStorage.setItem('miraahLang',state.lang);localStorage.removeItem('countryMirrorLang');if(state.a)state.queryA=name(state.a);if(state.b)state.queryB=name(state.b);syncInput('A');syncInput('B');render()};$('#trendMetric').onchange=e=>{state.trend=e.target.value;if(bothReady())renderTrend()};$('#rankMetric').onchange=e=>{state.rank=e.target.value;if(bothReady())renderRanking()};window.addEventListener('resize',()=>{if(bothReady()){renderTrend();renderRadar()}});render()}
 function swapCountries(){if(!state.a&&!state.b&&!state.queryA&&!state.queryB)return;[state.a,state.b]=[state.b,state.a];[state.queryA,state.queryB]=[state.queryB,state.queryA];state.swapNonce++;syncInput('A');syncInput('B');closeAllSuggestions();$('#comparisonHero').classList.remove('swap-flash');$('#chartsGrid').classList.remove('swap-flash');void $('#comparisonHero').offsetWidth;$('#comparisonHero').classList.add('swap-flash');$('#chartsGrid').classList.add('swap-flash');render()}
 function render(){setStaticText();syncInput('A');syncInput('B');renderMetaOnly();updateEmptyState();if(!bothReady()){$('#chartLegend').innerHTML='';return}$('#trendMetric').innerHTML=metricOptions();$('#rankMetric').innerHTML=metricOptions(true);$('#trendMetric').value=state.trend;$('#rankMetric').value=state.rank;$('#chartLegend').innerHTML=legendHtml();renderKpis();renderTrend();renderRadar();renderHappiness();renderRanking()}
 function legendHtml(){return [[state.a,A],[state.b,B]].map(([c,col])=>`<span><i class="dot" style="background:${col}"></i>${esc(name(c))}</span>`).join('')}
@@ -133,9 +161,14 @@ init();
 '''
 
 
-CANONICAL_URL = brand.CANONICAL_ORIGIN
-_OG_IMAGE = f"{CANONICAL_URL.rstrip('/')}{brand.SOCIAL_CARD}"
-_LOGO = f"{CANONICAL_URL.rstrip('/')}{brand.APP_ICON_SVG}"
+CANONICAL_URL = f"{brand.CANONICAL_ORIGIN}compare/"
+HOME_URL = brand.CANONICAL_ORIGIN
+DASHBOARD_REDIRECT = (
+    "<script>(function(){try{if(/\\/dashboard\\.html$/i.test(location.pathname))"
+    "location.replace('/compare/'+location.search+location.hash)}catch(e){}})();</script>"
+)
+_OG_IMAGE = f"{brand.CANONICAL_ORIGIN.rstrip('/')}{brand.SOCIAL_CARD}"
+_LOGO = f"{brand.CANONICAL_ORIGIN.rstrip('/')}{brand.APP_ICON_SVG}"
 SEO_HEAD = (
     f'<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
     f'<title>مرآة | قارن الدول بالأرقام</title>'
@@ -167,7 +200,7 @@ def write_seo_files() -> None:
         "User-agent: *\n"
         "Allow: /\n"
         "\n"
-        f"Sitemap: {CANONICAL_URL}sitemap.xml\n"
+        f"Sitemap: {HOME_URL}sitemap.xml\n"
     )
     (ROOT / "public" / "robots.txt").write_text(robots, encoding="utf-8")
     # Keep passport routes out of the sitemap until passport indexing is intentionally re-enabled
@@ -175,9 +208,14 @@ def write_seo_files() -> None:
     sitemap = f'''<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>{HOME_URL}</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
     <loc>{CANONICAL_URL}</loc>
     <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
+    <priority>0.9</priority>
   </url>
 </urlset>
 '''
@@ -185,7 +223,8 @@ def write_seo_files() -> None:
 
 
 def main():
-    source = TARGET.read_text(encoding="utf-8")
+    seed = COMPARE if COMPARE.is_file() else TARGET
+    source = seed.read_text(encoding="utf-8")
     data_start = source.index("const DATA=")
     marker = None
     for cand in ("\nconst MIRAAH_THEME_KEY", "\nconst $="):
@@ -198,9 +237,24 @@ def main():
     data_script = source[data_start:marker].rstrip()
     if not data_script.endswith(";"):
         raise SystemExit("Could not locate end of DATA assignment")
-    html = f'''<!doctype html><html lang="ar" dir="rtl"><head>{SEO_HEAD}{theme.NO_FLASH_SCRIPT}<style>{CSS}</style></head><body>{BODY}<script>{data_script}\n{JS}</script></body></html>'''
+    html = (
+        "<!doctype html><html lang=\"ar\" dir=\"rtl\"><head>"
+        + SEO_HEAD
+        + theme.NO_FLASH_SCRIPT
+        + DASHBOARD_REDIRECT
+        + "<style>"
+        + CSS
+        + "</style></head><body>"
+        + BODY
+        + "<script>"
+        + data_script
+        + "\n"
+        + JS
+        + "</script></body></html>"
+    )
+    COMPARE.parent.mkdir(parents=True, exist_ok=True)
+    COMPARE.write_text(html, encoding="utf-8")
     TARGET.write_text(html, encoding="utf-8")
-    INDEX.write_text(html, encoding="utf-8")
     write_seo_files()
 
 

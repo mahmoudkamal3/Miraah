@@ -35,14 +35,19 @@ class ThemeHtmlTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.index = (PUBLIC / "index.html").read_text(encoding="utf-8")
+        cls.compare = (PUBLIC / "compare" / "index.html").read_text(encoding="utf-8")
         cls.dashboard = (PUBLIC / "dashboard.html").read_text(encoding="utf-8")
         cls.passport = (PUBLIC / "passport" / "index.html").read_text(encoding="utf-8")
         cls.malta = (PUBLIC / "passport" / "malta" / "index.html").read_text(encoding="utf-8")
         cls.attr = (PUBLIC / "passport" / "image-attributions.html").read_text(encoding="utf-8")
         cls.passport_js = (PUBLIC / "passport" / "assets" / "passport.js").read_text(encoding="utf-8")
 
-    def test_dashboard_byte_identical(self):
+    def test_compare_dashboard_byte_identical(self):
         self.assertEqual(
+            (PUBLIC / "compare" / "index.html").read_bytes(),
+            (PUBLIC / "dashboard.html").read_bytes(),
+        )
+        self.assertNotEqual(
             (PUBLIC / "index.html").read_bytes(),
             (PUBLIC / "dashboard.html").read_bytes(),
         )
@@ -64,8 +69,8 @@ class ThemeHtmlTests(unittest.TestCase):
                 self.assertIn("prefers-color-scheme", head)
 
     def test_theme_tokens_present(self):
-        self.assertIn("--bg:", self.index)
-        self.assertIn('data-theme="light"', self.index)
+        self.assertIn("--bg:", self.compare)
+        self.assertIn('data-theme="light"', self.compare)
         css = (PUBLIC / "passport" / "assets" / "passport.css").read_text(encoding="utf-8")
         self.assertIn("--bg:", css)
         self.assertIn('data-theme="light"', css)
@@ -89,7 +94,7 @@ class ThemeHtmlTests(unittest.TestCase):
                 self.assertNotIn("🌙", html)
 
     def test_shared_storage_key(self):
-        for blob in (self.index, self.passport_js, self.attr):
+        for blob in (self.compare, self.passport_js, self.attr):
             self.assertIn("miraahTheme", blob)
 
     def test_labels_ar_en(self):
@@ -102,20 +107,20 @@ class ThemeHtmlTests(unittest.TestCase):
             self.assertIn("Use device setting", blob)
 
     def test_theme_change_hooks(self):
-        self.assertIn("onMiraahThemeChange", self.index)
-        self.assertIn("refreshChartColors", self.index)
+        self.assertIn("onMiraahThemeChange", self.compare)
+        self.assertIn("refreshChartColors", self.compare)
         self.assertIn("onMiraahThemeChange", self.passport_js)
         self.assertIn("refreshMapColors", self.passport_js)
 
     def test_default_system_preference_in_boot(self):
         # Boot defaults preference to system when unset
-        self.assertIn("p='system'", self.index)
-        self.assertIn("prefers-color-scheme", self.index)
+        self.assertIn("p='system'", self.compare)
+        self.assertIn("prefers-color-scheme", self.compare)
 
     def test_dynamic_theme_color(self):
         self.assertIn("theme-color", self.index)
-        self.assertIn("#e8eef6", self.index)  # light meta color in JS
-        self.assertIn("#07111f", self.index)  # dark meta color
+        self.assertIn("#e8eef6", self.compare)  # light meta color in JS
+        self.assertIn("#07111f", self.compare)  # dark meta color
 
     def test_logo_present_both_modes(self):
         self.assertIn("/assets/brand/miraah-app-icon.svg", self.index)
@@ -140,7 +145,7 @@ class ThemeHtmlTests(unittest.TestCase):
         self.assertIn("import miraah_theme as theme", passport)
         self.assertIn("theme.NO_FLASH_SCRIPT", dash)
         self.assertIn("theme.NO_FLASH_SCRIPT", passport)
-        self.assertIn("theme.THEME_CSS", dash)
+        self.assertIn("chrome.chrome_css_bundle", dash)
         self.assertIn("theme.THEME_JS", passport)
 
 

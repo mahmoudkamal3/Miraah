@@ -335,11 +335,12 @@ class UpdaterTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             dash = root / "dashboard.html"
-            index = root / "index.html"
+            compare = root / "compare" / "index.html"
+            compare.parent.mkdir(parents=True, exist_ok=True)
             dash.write_text(html, encoding="utf-8")
-            index.write_text(html, encoding="utf-8")
+            compare.write_text(html, encoding="utf-8")
             before_d = dash.read_bytes()
-            before_i = index.read_bytes()
+            before_i = compare.read_bytes()
 
             def fetch(code: str, end_year: int):
                 del end_year
@@ -361,13 +362,13 @@ class UpdaterTests(unittest.TestCase):
                 write=True,
                 end_year=2025,
                 target=dash,
-                index=index,
+                compare=compare,
                 fetch_fn=fetch,
             )
             self.assertEqual(code, 1)
             self.assertTrue(summary["errors"])
             self.assertEqual(dash.read_bytes(), before_d)
-            self.assertEqual(index.read_bytes(), before_i)
+            self.assertEqual(compare.read_bytes(), before_i)
 
     def test_dry_run_zero_file_changes(self) -> None:
         payload = make_payload(stale_year=True)
@@ -391,18 +392,19 @@ class UpdaterTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             dash = root / "dashboard.html"
-            index = root / "index.html"
+            compare = root / "compare" / "index.html"
+            compare.parent.mkdir(parents=True, exist_ok=True)
             dash.write_text(html, encoding="utf-8")
-            index.write_text(html, encoding="utf-8")
+            compare.write_text(html, encoding="utf-8")
             before_d = dash.read_bytes()
-            before_i = index.read_bytes()
+            before_i = compare.read_bytes()
             mtime_d = dash.stat().st_mtime_ns
 
             code, summary = wb.run(
                 write=False,
                 end_year=2025,
                 target=dash,
-                index=index,
+                compare=compare,
                 fetch_fn=fetch,
             )
             self.assertEqual(code, 0)
@@ -410,7 +412,7 @@ class UpdaterTests(unittest.TestCase):
             self.assertFalse(summary["wrote"])
             self.assertEqual(summary["mode"], "dry-run")
             self.assertEqual(dash.read_bytes(), before_d)
-            self.assertEqual(index.read_bytes(), before_i)
+            self.assertEqual(compare.read_bytes(), before_i)
             self.assertEqual(dash.stat().st_mtime_ns, mtime_d)
 
     def test_happiness_preservation(self) -> None:
@@ -545,15 +547,16 @@ class UpdaterTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             dash = root / "dashboard.html"
-            index = root / "index.html"
+            compare = root / "compare" / "index.html"
+            compare.parent.mkdir(parents=True, exist_ok=True)
             dash.write_text(html, encoding="utf-8")
-            index.write_text(html, encoding="utf-8")
+            compare.write_text(html, encoding="utf-8")
 
             code, summary = wb.run(
                 write=False,
                 end_year=2026,
                 target=dash,
-                index=index,
+                compare=compare,
                 fetch_fn=fetch,
             )
             self.assertEqual(code, 0)
@@ -594,20 +597,21 @@ class UpdaterTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             dash = root / "dashboard.html"
-            index = root / "index.html"
+            compare = root / "compare" / "index.html"
+            compare.parent.mkdir(parents=True, exist_ok=True)
             dash.write_text(html, encoding="utf-8")
-            index.write_text(html, encoding="utf-8")
+            compare.write_text(html, encoding="utf-8")
 
             code, summary = wb.run(
                 write=True,
                 end_year=2025,
                 target=dash,
-                index=index,
+                compare=compare,
                 fetch_fn=fetch,
             )
             self.assertEqual(code, 0)
             self.assertTrue(summary["wrote"])
-            self.assertEqual(dash.read_bytes(), index.read_bytes())
+            self.assertEqual(dash.read_bytes(), compare.read_bytes())
             # Happiness still present
             parsed = wb.read_payload(dash.read_text(encoding="utf-8"))
             self.assertEqual(parsed["countries"]["AAA"]["happiness"]["2025"]["score"], 7.1)
@@ -652,6 +656,53 @@ class UpdaterTests(unittest.TestCase):
         self.assertFalse(args.write)
         args_write = wb.parse_args(["--write"])
         self.assertTrue(args_write.write)
+
+
+
+    def test_updater_never_overwrites_homepage(self) -> None:
+        payload = make_payload(stale_year=True)
+
+        def fetch(code: str, end_year: int):
+            del end_year
+            rows = [
+                {
+                    "countryiso3code": iso,
+                    "date": str(year),
+                    "value": float(year),
+                    "indicator": {"id": code},
+                }
+                for iso in ("AAA", "BBB")
+                for year in range(2000, 2026)
+                if not (code == "SP.DYN.LE00.IN" and year == 2022)
+            ]
+            return rows, 1
+
+        html = wrap_html(payload, blank_lines=2)
+        homepage_html = "<!doctype html><html><body><div class=\"home-hero\"></div><script>const HOME_BOOT={}</script></body></html>"
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            dash = root / "dashboard.html"
+            compare = root / "compare" / "index.html"
+            home = root / "index.html"
+            compare.parent.mkdir(parents=True, exist_ok=True)
+            dash.write_text(html, encoding="utf-8")
+            compare.write_text(html, encoding="utf-8")
+            home.write_text(homepage_html, encoding="utf-8")
+            before = home.read_bytes()
+            code, summary = wb.run(
+                write=True,
+                end_year=2025,
+                target=dash,
+                compare=compare,
+                homepage=home,
+                fetch_fn=fetch,
+            )
+            self.assertEqual(code, 0)
+            self.assertTrue(summary["wrote"])
+            self.assertEqual(home.read_bytes(), before)
+            self.assertIn("HOME_BOOT", home.read_text(encoding="utf-8"))
+            self.assertEqual(dash.read_bytes(), compare.read_bytes())
+            self.assertNotEqual(dash.read_bytes(), before)
 
 
 if __name__ == "__main__":

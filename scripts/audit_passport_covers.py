@@ -27,6 +27,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 import miraah_theme as theme  # noqa: E402
+import miraah_chrome as chrome  # noqa: E402
 
 import passport_locale as locale  # noqa: E402
 
@@ -1122,9 +1123,9 @@ def write_attributions_html(entries: list[dict[str, Any]]) -> None:
             f"<td dir=\"ltr\">{html.escape(e.get('attributionText') or '')}</td>"
             "</tr>"
         )
-    theme_css = theme.THEME_CSS
-    theme_js = theme.THEME_JS
-    theme_btn = theme.theme_control_html()
+    theme_css = chrome.chrome_css_bundle()
+    theme_js = theme.THEME_JS + chrome.CHROME_JS
+    theme_header = chrome.header_html(current="passport", include_lang=False)
     no_flash = theme.NO_FLASH_SCRIPT
     body = f"""<!DOCTYPE html>
 <html lang="en">
@@ -1147,7 +1148,6 @@ def write_attributions_html(entries: list[dict[str, Any]]) -> None:
     body{{margin:0;background:var(--bg);color:var(--text);font-family:Georgia,"Times New Roman",serif;line-height:1.6}}
     .shell{{max-width:980px;margin:auto;padding:28px 18px 60px}}
     h1,h2{{font-family:system-ui,Segoe UI,sans-serif}}
-    .topbar{{display:flex;justify-content:flex-end;gap:8px;margin-bottom:12px}}
     .panel{{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px;margin:18px 0}}
     table{{width:100%;border-collapse:collapse;font-size:13px}}
     th,td{{border-top:1px solid var(--border);padding:10px;vertical-align:top;text-align:start}}
@@ -1161,7 +1161,7 @@ def write_attributions_html(entries: list[dict[str, Any]]) -> None:
 </head>
 <body>
   <main class="shell">
-    <div class="topbar">{theme_btn}</div>
+    {theme_header}
     <p class="muted"><a href="./">← Passport power</a></p>
     <h1>Passport cover image attributions</h1>
     <p class="muted">Approved cover photographs are sourced only from Wikimedia Commons under commercial-use-compatible licenses. Mir’ah illustrations are used when no approved cover exists. Photograph licenses do not resolve separate restrictions on state emblems or passport reproduction.</p>
@@ -1209,6 +1209,8 @@ def write_attributions_html(entries: list[dict[str, Any]]) -> None:
   <script>
 {theme_js}
     initThemeControls();
+    if(typeof initPlatformNav==='function')initPlatformNav();
+    if(typeof syncPlatformChrome==='function')syncPlatformChrome(document.documentElement.lang==='ar'?'ar':'en');
     const buttons=[...document.querySelectorAll('.tabs button')];
     const en=document.getElementById('panel-en');
     const ar=document.getElementById('panel-ar');
@@ -1218,7 +1220,8 @@ def write_attributions_html(entries: list[dict[str, Any]]) -> None:
       en.hidden=arMode; ar.hidden=!arMode;
       document.documentElement.lang=arMode?'ar':'en';
       document.documentElement.dir=arMode?'rtl':'ltr';
-      if(typeof syncThemeControls==='function')syncThemeControls();
+      if(typeof syncPlatformChrome==='function')syncPlatformChrome(arMode?'ar':'en');
+      else if(typeof syncThemeControls==='function')syncThemeControls();
     }}));
   </script>
 </body>

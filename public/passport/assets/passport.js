@@ -54,6 +54,53 @@ function initThemeControls(){
 function cssVar(name,fallback){const v=getComputedStyle(document.documentElement).getPropertyValue(name).trim();return v||fallback}
 function chartPalette(){return{A:cssVar('--brand-cyan','#38d6b0'),B:cssVar('--brand-amber','#ffb15c'),MUTED:cssVar('--chart-label','#8fa6bf'),GRID:cssVar('--chart-grid','#203752'),STROKE:cssVar('--chart-plot-stroke','#07111f'),TEXT:cssVar('--text','#ecf4ff')}}
 
+const MiraahNavI18n={
+  ar:{home:'الرئيسية',compare:'مقارنة الدول',passport:'قوة جواز السفر',navLabel:'التنقل الرئيسي',menuOpen:'فتح القائمة',menuClose:'إغلاق القائمة',brandHome:'العودة إلى الصفحة الرئيسية',explore:'استكشف',sources:'المصادر',
+    footerDesc:'منصة بيانات ثنائية اللغة لمقارنة جودة الحياة وقوة جواز السفر بمصادر معلنة.',
+    compareSources:'مقارنة الدول: البنك الدولي (مؤشرات التنمية العالمية) وتقرير السعادة العالمي.',
+    passportSources:'جواز السفر: Passport Index Data — مجموعة معلوماتية تجريبية. تحقق من المتطلبات مع السفارة أو شركة الطيران أو جهة رسمية قبل السفر.',
+    disclaimer:'مرآة منصة معلوماتية وليست جهة حكومية أو استشارية للسفر.',
+    methodology:'منهجية جواز السفر',attributions:'إسناد صور الجوازات'},
+  en:{home:'Home',compare:'Compare countries',passport:'Passport power',navLabel:'Primary',menuOpen:'Open menu',menuClose:'Close menu',brandHome:'Back to homepage',explore:'Explore',sources:'Sources',
+    footerDesc:'A bilingual data platform for comparing quality of life and passport mobility with disclosed sources.',
+    compareSources:'Country comparison: World Bank World Development Indicators and the World Happiness Report.',
+    passportSources:'Passport: Passport Index Data — an experimental informational dataset. Verify requirements with an embassy, airline, or official authority before travel.',
+    disclaimer:'Mir’ah is informational and is not a government or travel-advisory body.',
+    methodology:'Passport methodology',attributions:'Passport image attributions'}
+};
+function syncPlatformChrome(lang){
+  const t=MiraahNavI18n[lang==='en'?'en':'ar'];
+  const set=(id,text)=>{const el=document.getElementById(id);if(el)el.textContent=text};
+  set('navHome',t.home);set('navCompare',t.compare);set('navPassport',t.passport);
+  const nav=document.getElementById('productNav');if(nav)nav.setAttribute('aria-label',t.navLabel);
+  const home=document.getElementById('brandHome');if(home)home.setAttribute('aria-label',t.brandHome);
+  const toggle=document.getElementById('navToggle');
+  if(toggle){const open=toggle.getAttribute('aria-expanded')==='true';toggle.setAttribute('aria-label',open?t.menuClose:t.menuOpen)}
+  set('footerBrandName',lang==='en'?'Mir\u2019ah':'مرآة');
+  set('footerBrandInline',lang==='en'?'Mir\u2019ah':'مرآة');
+  set('footerDesc',t.footerDesc);
+  set('footerExploreLabel',t.explore);
+  set('footerSourcesLabel',t.sources);
+  set('footerHome',t.home);set('footerCompare',t.compare);set('footerPassport',t.passport);
+  set('footerCompareSources',t.compareSources);set('footerPassportSources',t.passportSources);
+  set('footerDisclaimer',t.disclaimer);
+  set('footerMethodLink',t.methodology);set('footerAttrLink',t.attributions);
+  if(typeof syncThemeControls==='function')syncThemeControls();
+}
+function initPlatformNav(){
+  const toggle=document.getElementById('navToggle'),nav=document.getElementById('productNav');
+  if(!toggle||!nav)return;
+  toggle.addEventListener('click',()=>{
+    const open=!nav.classList.contains('open');
+    nav.classList.toggle('open',open);
+    toggle.setAttribute('aria-expanded',open?'true':'false');
+    const lang=document.documentElement.lang==='en'?'en':'ar';
+    const t=MiraahNavI18n[lang];
+    toggle.setAttribute('aria-label',open?t.menuClose:t.menuOpen);
+  });
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){nav.classList.remove('open');toggle.setAttribute('aria-expanded','false')}});
+}
+
 const $=s=>document.querySelector(s);
 const CANONICAL='https://miraah.mirapp.workers.dev/';
 const COVERAGE={passports:199,travelDestinations:198};
@@ -71,7 +118,7 @@ const T={
  ar:{
   brand:'مرآة',subtitle:'قوة جواز السفر',pageTitleLanding:'مرآة | قوة جواز السفر (تجريبي)',
   pageDescriptionLanding:'مرآة — درجة التنقل التجريبية لجوازات السفر عبر 199 جوازًا و198 وجهة سفر.',
-  navCompare:'مقارنة الدول',navPassport:'قوة جواز السفر',
+  navHome:'الرئيسية',navCompare:'مقارنة الدول',navPassport:'قوة جواز السفر',
   hero:'قوة جواز السفر، بدرجة مرآة التجريبية',lead:'اختر جواز سفر لعرض درجة التنقل في مرآة وترتيب مرآة التجريبي وفئات الدخول إلى الوجهات.',
   searchLabel:'اختر جواز السفر',search:'ابحث عن دولة',empty:'اختر جواز سفر لعرض قوة التنقل',
   clear:'مسح',toggle:'عرض قائمة الجوازات',score:'درجة التنقل في مرآة',rank:'ترتيب مرآة التجريبي',
@@ -120,7 +167,7 @@ const T={
  en:{
   brand:'Mir\u2019ah',subtitle:'Passport power',pageTitleLanding:'Mir\u2019ah | Passport power (experimental)',
   pageDescriptionLanding:'Mir\u2019ah — experimental passport mobility scores across 199 passports and 198 travel destinations.',
-  navCompare:'Country comparison',navPassport:'Passport power',
+  navHome:'Home',navCompare:'Compare countries',navPassport:'Passport power',
   hero:'Passport power with an experimental Mir\u2019ah score',lead:'Choose a passport to see the Mir\u2019ah Mobility Score, experimental Mir\u2019ah rank, and destination access categories.',
   searchLabel:'Choose a passport',search:'Search for a country',empty:'Choose a passport to explore mobility power',
   clear:'Clear',toggle:'Show passport list',score:'Mir\u2019ah Mobility Score',rank:'Experimental Mir\u2019ah rank',
@@ -173,6 +220,34 @@ const REAL_PASSPORT_COVERS_ENABLED=false;
 const state={lang:localStorage.getItem('miraahLang')||localStorage.getItem('countryMirrorLang')||'ar',query:'',open:false,activeIndex:-1,matches:[],selected:null,detail:null,index:null,meta:null,covers:null,destQuery:'',statusFilter:'all',regionFilter:'all'};
 const tr=()=>T[state.lang];
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+const MIRAAH_FLAG_BASE='/assets/flags/';
+const MIRAAH_FLAG_FALLBACK='/assets/flags/_fallback.svg';
+const MIRAAH_FLAG_ALIAS={uk:'gb'};
+function resolveFlagIso2(iso2){
+  const raw=String(iso2||'').trim().toLowerCase();
+  if(!raw)return '';
+  return MIRAAH_FLAG_ALIAS[raw]||raw;
+}
+function flagUrl(iso2){
+  const code=resolveFlagIso2(iso2);
+  if(!code)return MIRAAH_FLAG_FALLBACK;
+  return MIRAAH_FLAG_BASE+code+'.svg';
+}
+function flagImgHtml(iso2,name,size,{lazy=true,decorative=true}={}){
+  const code=resolveFlagIso2(iso2);
+  const src=flagUrl(code);
+  const cls='miraah-flag flag-'+(size||'sm');
+  const alt=decorative?'':esc(name||code.toUpperCase());
+  const aria=decorative?' aria-hidden="true" alt=""':' alt="'+alt+'"';
+  const loading=lazy?' loading="lazy"':'';
+  const title=name?(' title="'+esc(name)+'"'):'';
+  return '<span class="'+cls+'"'+title+'><img src="'+src+'" width="640" height="480" decoding="async"'+loading+aria+' onerror="this.onerror=null;this.src=\''+MIRAAH_FLAG_FALLBACK+'\'"></span>';
+}
+function flagWithNameHtml(iso2,name,size,{lazy=true}={}){
+  return '<span class="flag-with-name">'+flagImgHtml(iso2,name,size,{lazy,decorative:true})+'<span class="flag-label">'+esc(name)+'</span></span>';
+}
+
 const nameOf=p=>state.lang==='ar'?p.nameAr:p.nameEn;
 const searchBlob=p=>`${p.nameEn} ${p.nameAr} ${p.iso3}`.toLowerCase();
 function coverFor(p){
@@ -183,7 +258,6 @@ function coverFor(p){
   if(meta.emblemRightsReviewRequired)return null;
   return meta;
 }
-function flagEmoji(iso2){if(!iso2||iso2==='XK')return '🏳️';return String.fromCodePoint(...[...iso2.toUpperCase()].map(c=>127397+c.charCodeAt(0)))}
 function regionLabel(region){const map=REGION_LABELS[region];if(!map)return region||'—';return state.lang==='ar'?map.ar:map.en}
 function formatDate(iso){
   if(!iso)return '—';
@@ -321,7 +395,6 @@ function renderPassportBook(p){
       linear-gradient(160deg,${base},#070d16 128%)">
       <div class="passport-pattern" aria-hidden="true"></div>
       <div class="passport-chip" aria-hidden="true">${chipSvg()}</div>
-      <div class="passport-flag" aria-hidden="true">${esc(flagEmoji(p.iso2))}</div>
       <div class="passport-emblem" aria-hidden="true">${emblemSvg()}</div>
       <div class="passport-country">${esc(label)}</div>
       <div class="passport-label gold-type">${esc(t.passportWord)}</div>
@@ -340,10 +413,7 @@ function setStaticText(){
   document.documentElement.dir=state.lang==='ar'?'rtl':'ltr';
   $('#brandTitle').textContent=t.brand;
   $('#brandSubtitle').textContent=t.subtitle;
-  const home=$('#brandHome');if(home)home.setAttribute('aria-label',state.lang==='ar'?'العودة إلى الصفحة الرئيسية':'Back to homepage');
-  if(typeof syncThemeControls==='function')syncThemeControls();
-  $('#navCompare').textContent=t.navCompare;
-  $('#navPassport').textContent=t.navPassport;
+  if(typeof syncPlatformChrome==='function')syncPlatformChrome(state.lang);
   $('#langBtn').textContent=state.lang==='ar'?'EN':'ع';
   $('#heroTitle').textContent=t.hero;
   $('#heroLead').textContent=t.lead;
@@ -380,7 +450,7 @@ function renderSuggestions({keepIndex=false}={}){
     box.classList.add('open');
     return;
   }
-  box.innerHTML=matches.map((p,i)=>`<div class="suggestion${i===state.activeIndex?' active':''}" role="option" aria-selected="${i===state.activeIndex?'true':'false'}" data-code="${p.iso3}" data-index="${i}"><b>${esc(flagEmoji(p.iso2))} ${esc(nameOf(p))}</b><small>${esc(p.iso3)} · ${esc(tr().rank)} #${p.rank}</small></div>`).join('');
+  box.innerHTML=matches.map((p,i)=>`<div class="suggestion${i===state.activeIndex?' active':''}" role="option" aria-selected="${i===state.activeIndex?'true':'false'}" data-code="${p.iso3}" data-index="${i}"><b>${flagWithNameHtml(p.iso2,nameOf(p),'sm',{lazy:false})}</b><small>${esc(p.iso3)} · ${esc(tr().rank)} #${p.rank}</small></div>`).join('');
   box.classList.add('open');
   box.querySelectorAll('.suggestion').forEach(el=>{
     el.onmousedown=e=>{e.preventDefault();selectPassport(el.dataset.code)};
@@ -434,9 +504,17 @@ function clearPassport(){
   const panel=$('#mapPanel');if(panel)panel.hidden=true;
   setStaticText();
 }
+function renderIdentity(p){
+  const el=$('#passportIdentity');if(!el||!p)return;
+  const label=nameOf(p);
+  el.innerHTML=`<div class="flag-stage">${flagImgHtml(p.iso2,label,'hero',{lazy:false,decorative:false})}</div>`+
+    `<h3 class="identity-name">${esc(label)}</h3>`+
+    `<p class="identity-code">${esc(p.iso3)}${p.iso2?' · '+esc(String(p.iso2).toUpperCase()):''}</p>`;
+}
 function renderHero(){
   const t=tr(),p=state.selected;
   if(!p)return;
+  renderIdentity(p);
   renderPassportBook(p);
   $('#scoreValue').textContent=String(p.mobilityScore);
   $('#scoreLabel').textContent=t.score;
@@ -525,7 +603,7 @@ function renderDetail(){
       const label=state.lang==='ar'?d.nameAr:d.nameEn;
       const days=d.days!=null?`${d.days}`:'—';
       const active=mapState.selectedIso===d.iso3?' is-map-active':'';
-      return `<tr class="${active.trim()}" data-iso3="${esc(d.iso3)}"><td>${esc(flagEmoji(d.iso2))} ${esc(label)}</td><td><span class="status-pill ${esc(d.status)}">${esc(t.cats[d.status]||d.status)}</span></td><td>${esc(regionLabel(d.region))}</td><td>${esc(days)}</td></tr>`;
+      return `<tr class="${active.trim()}" data-iso3="${esc(d.iso3)}"><td>${flagWithNameHtml(d.iso2,label,'xs')}</td><td><span class="status-pill ${esc(d.status)}">${esc(t.cats[d.status]||d.status)}</span></td><td>${esc(regionLabel(d.region))}</td><td>${esc(days)}</td></tr>`;
     }).join('');
   }
   renderChart();
@@ -603,6 +681,7 @@ function setupSearch(){
 }
 async function init(){
   initThemeControls();
+  if(typeof initPlatformNav==='function')initPlatformNav();
   window.onMiraahThemeChange=function(){
     if(typeof refreshMapColors==='function')refreshMapColors();
     if(typeof renderDetail==='function'&&state.selected)renderDetail();
@@ -719,7 +798,7 @@ function tooltipHtml(iso){
   if(!d)return `<strong>${esc(iso)}</strong><div class="muted">${esc(t.mapUnmapped)}</div>`;
   const name=state.lang==='ar'?d.nameAr:d.nameEn;
   const status=t.cats[d.status]||d.status;
-  return `<strong>${esc(flagEmoji(d.iso2))} ${esc(name)}</strong>
+  return `<strong class="flag-with-name">${flagImgHtml(d.iso2,name,'xs',{lazy:false})}<span class="flag-label">${esc(name)}</span></strong>
     <div>${esc(status)}</div>
     <div class="muted">${esc(t.colStay)}: ${esc(stayText(d))}</div>
     <div class="muted">${esc(regionLabel(d.region))}</div>`;
@@ -738,7 +817,7 @@ function updateMapSheet(iso){
   const name=d?(state.lang==='ar'?d.nameAr:d.nameEn):iso;
   sheet.classList.add('open');
   sheet.innerHTML=`<button type="button" class="sheet-close" id="mapSheetClose" aria-label="${esc(t.close)}">×</button>
-    <strong>${esc(d?flagEmoji(d.iso2)+' '+name:name)}</strong>
+    <strong class="flag-with-name">${d?flagImgHtml(d.iso2,name,'sm',{lazy:false}):''}<span class="flag-label">${esc(name)}</span></strong>
     <div>${esc(d?(t.cats[d.status]||d.status):t.mapUnmapped)}</div>
     <div class="muted">${esc(t.colStay)}: ${esc(stayText(d))}</div>
     <div class="muted">${esc(d?regionLabel(d.region):'—')}</div>`;

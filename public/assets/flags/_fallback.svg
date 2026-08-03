@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Flag unavailable">
+  <rect width="640" height="480" fill="#0d1b2e"/>
+  <rect x="24" y="24" width="592" height="432" rx="28" fill="#12243a" stroke="#2b9fff" stroke-width="8"/>
+  <path fill="#38d6b0" d="M180 360V120h78c28 42 48 100 66 166 18-66 38-124 66-166h78v240h-70V210c-28 56-52 104-74 140-22-36-46-84-74-140v150H180z"/>
+</svg>

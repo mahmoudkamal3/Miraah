@@ -2,7 +2,8 @@
 """Refresh embedded WDI series while retaining the last known-good dashboard.
 
 Default mode is --dry-run (fetch + validate, no file writes).
-Pass --write to update public/dashboard.html and public/index.html.
+Pass --write to update public/compare/index.html and public/dashboard.html.
+Never overwrite the platform homepage at public/index.html.
 """
 
 from __future__ import annotations
@@ -25,11 +26,12 @@ from typing import Any, Callable
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC = ROOT / "public"
-TARGET = PUBLIC / "dashboard.html"
-INDEX = PUBLIC / "index.html"
+COMPARE = PUBLIC / "compare" / "index.html"
+TARGET = PUBLIC / "dashboard.html"  # compatibility alias
+HOMEPAGE = PUBLIC / "index.html"
 
 DATA_START_RE = re.compile(r"const\s+DATA\s*=")
-DATA_END_RE = re.compile(r"const\s+\$\s*=")
+DATA_END_RE = re.compile(r"const\s+(?:MIRAAH_THEME_KEY|\$)\s*=")
 
 START_YEAR = 2000
 EXPECTED_INDICATOR_COUNT = 12
@@ -102,7 +104,7 @@ def locate_data_spans(html: str) -> tuple[int, int, int]:
     json_start = start_match.end()
     end_match = DATA_END_RE.search(html, json_start)
     if not end_match:
-        raise UpdateError("Could not locate const $= after DATA block")
+        raise UpdateError("Could not locate const MIRAAH_THEME_KEY or const $= after DATA block")
     between = html[json_start : end_match.start()]
     stripped = between.rstrip()
     if not stripped.endswith(";"):
@@ -452,8 +454,9 @@ def prepare_outputs(original_html: str, new_payload: dict, original_payload: dic
     return html_out
 
 
-def atomic_write_pair(html_out: str, target: Path = TARGET, index: Path = INDEX) -> None:
+def atomic_write_pair(html_out: str, target: Path = TARGET, compare: Path = COMPARE) -> None:
     target.parent.mkdir(parents=True, exist_ok=True)
+    compare.parent.mkdir(parents=True, exist_ok=True)
     # Prepare both temps, validate, then replace.
     with tempfile.NamedTemporaryFile(
         "w", encoding="utf-8", delete=False, dir=target.parent, suffix=".tmp"
@@ -461,32 +464,32 @@ def atomic_write_pair(html_out: str, target: Path = TARGET, index: Path = INDEX)
         dash_tmp.write(html_out)
         dash_path = Path(dash_tmp.name)
     with tempfile.NamedTemporaryFile(
-        "w", encoding="utf-8", delete=False, dir=index.parent, suffix=".tmp"
-    ) as index_tmp:
-        index_tmp.write(html_out)
-        index_path = Path(index_tmp.name)
+        "w", encoding="utf-8", delete=False, dir=compare.parent, suffix=".tmp"
+    ) as compare_tmp:
+        compare_tmp.write(html_out)
+        compare_path = Path(compare_tmp.name)
 
     try:
-        for path in (dash_path, index_path):
+        for path in (dash_path, compare_path):
             text = path.read_text(encoding="utf-8")
             read_payload(text)
             if text != html_out:
                 raise UpdateError("Temporary output drifted from prepared HTML")
         dash_path.replace(target)
-        index_path.replace(index)
+        compare_path.replace(compare)
     finally:
-        for path in (dash_path, index_path):
+        for path in (dash_path, compare_path):
             if path.exists():
                 path.unlink(missing_ok=True)
 
     final_dash = target.read_text(encoding="utf-8")
-    final_index = index.read_text(encoding="utf-8")
-    if final_dash != final_index:
-        raise UpdateError("dashboard.html and index.html are not byte-identical after write")
+    final_compare = compare.read_text(encoding="utf-8")
+    if final_dash != final_compare:
+        raise UpdateError("dashboard.html and compare/index.html are not byte-identical after write")
     if final_dash != html_out:
         raise UpdateError("Written dashboard does not match prepared output")
     read_payload(final_dash)
-    read_payload(final_index)
+    read_payload(final_compare)
 
 
 def print_summary(summary: dict[str, Any]) -> None:
@@ -506,7 +509,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     mode.add_argument(
         "--write",
         action="store_true",
-        help="Write updates to public/dashboard.html and public/index.html.",
+        help="Write updates to public/compare/index.html and public/dashboard.html.",
     )
     parser.add_argument(
         "--end-year",
@@ -522,7 +525,8 @@ def run(
     write: bool = False,
     end_year: int | None = None,
     target: Path = TARGET,
-    index: Path = INDEX,
+    compare: Path = COMPARE,
+    homepage: Path = HOMEPAGE,
     fetch_fn: Callable[[str, int], tuple[list[dict], int]] | None = None,
 ) -> tuple[int, dict[str, Any]]:
     if not target.exists():
@@ -533,9 +537,11 @@ def run(
 
     original_html = target.read_text(encoding="utf-8")
     original_mtime = target.stat().st_mtime_ns
-    index_exists = index.exists()
-    index_mtime = index.stat().st_mtime_ns if index_exists else None
-    index_bytes = index.read_bytes() if index_exists else None
+    compare_exists = compare.exists()
+    compare_mtime = compare.stat().st_mtime_ns if compare_exists else None
+    compare_bytes = compare.read_bytes() if compare_exists else None
+    homepage_exists = homepage.exists()
+    homepage_bytes = homepage.read_bytes() if homepage_exists else None
     target_bytes = target.read_bytes()
 
     try:
@@ -561,17 +567,27 @@ def run(
             summary["message"] = "Dry-run complete; files not modified"
             if target.read_bytes() != target_bytes:
                 raise UpdateError("Dry-run modified dashboard.html")
-            if index_exists and index.read_bytes() != index_bytes:
-                raise UpdateError("Dry-run modified index.html")
+            if compare_exists and compare.read_bytes() != compare_bytes:
+                raise UpdateError("Dry-run modified compare/index.html")
+            if homepage_exists and homepage.read_bytes() != homepage_bytes:
+                raise UpdateError("Dry-run modified homepage index.html")
             if target.stat().st_mtime_ns != original_mtime:
                 raise UpdateError("Dry-run changed dashboard mtime")
-            if index_exists and index.stat().st_mtime_ns != index_mtime:
-                raise UpdateError("Dry-run changed index mtime")
+            if compare_exists and compare.stat().st_mtime_ns != compare_mtime:
+                raise UpdateError("Dry-run changed compare mtime")
             return 0, summary
 
-        atomic_write_pair(html_out, target=target, index=index)
+        atomic_write_pair(html_out, target=target, compare=compare)
+        if homepage_exists and homepage.read_bytes() != homepage_bytes:
+            raise UpdateError("Homepage index.html was modified by World Bank updater")
+        if homepage_exists:
+            home_text = homepage.read_text(encoding="utf-8")
+            if "HOME_BOOT" not in home_text and "home-hero" not in home_text:
+                raise UpdateError("Homepage no longer looks like the platform homepage")
+            if "const DATA=" in home_text and "countrySearchA" in home_text:
+                raise UpdateError("Homepage was replaced with the comparison dashboard")
         summary["wrote"] = True
-        summary["message"] = "Wrote public/dashboard.html and public/index.html"
+        summary["message"] = "Wrote public/compare/index.html and public/dashboard.html"
         return 0, summary
     except Exception as exc:
         summary = empty_summary(end_year or current_end_year())
@@ -582,8 +598,10 @@ def run(
         try:
             if target.read_bytes() != target_bytes:
                 summary["errors"].append("WARNING: dashboard.html changed after failure")
-            if index_exists and index.read_bytes() != index_bytes:
-                summary["errors"].append("WARNING: index.html changed after failure")
+            if compare_exists and compare.read_bytes() != compare_bytes:
+                summary["errors"].append("WARNING: compare/index.html changed after failure")
+            if homepage_exists and homepage.read_bytes() != homepage_bytes:
+                summary["errors"].append("WARNING: homepage index.html changed after failure")
         except OSError:
             pass
         return 1, summary

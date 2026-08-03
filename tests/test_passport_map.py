@@ -145,7 +145,7 @@ class PassportMapTests(unittest.TestCase):
     def test_scores_and_dashboard_unchanged(self) -> None:
         self.assertEqual(self.mlt["mobilityScore"], 159)
         self.assertEqual(self.mlt["rank"], 6)
-        a = (ROOT / "public" / "index.html").read_bytes()
+        a = (ROOT / "public" / "compare" / "index.html").read_bytes()
         b = (ROOT / "public" / "dashboard.html").read_bytes()
         self.assertEqual(a, b)
 

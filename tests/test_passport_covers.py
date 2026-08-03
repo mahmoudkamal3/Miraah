@@ -189,10 +189,11 @@ class PassportCoverPipelineTests(unittest.TestCase):
         self.assertEqual(malta["mobilityScore"], 159)
         self.assertEqual(malta["rank"], 6)
 
-    def test_dashboard_byte_identical(self) -> None:
-        a = (ROOT / "public" / "index.html").read_bytes()
+    def test_compare_dashboard_byte_identical(self) -> None:
+        a = (ROOT / "public" / "compare" / "index.html").read_bytes()
         b = (ROOT / "public" / "dashboard.html").read_bytes()
         self.assertEqual(a, b)
+
 
     def test_claim_coverage_honesty(self) -> None:
         if not self.entries:

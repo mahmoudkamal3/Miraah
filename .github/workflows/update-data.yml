@@ -31,35 +31,51 @@ jobs:
       - name: Dry-run validation
         run: python scripts/update_world_bank.py --dry-run
 
+      - name: Snapshot homepage before write
+        run: |
+          cp public/index.html /tmp/miraah-homepage-before.html
+          python - <<'PY'
+          from pathlib import Path
+          home = Path("public/index.html").read_text(encoding="utf-8")
+          assert "home-hero" in home or "HOME_BOOT" in home
+          assert "countrySearchA" not in home
+          print("homepage marker ok")
+          PY
+
       - name: Refresh World Bank data
         run: python scripts/update_world_bank.py --write
 
-      - name: Verify generated dashboard
+      - name: Verify comparison outputs and homepage safety
         run: |
-          test -s public/index.html
+          test -s public/compare/index.html
           test -s public/dashboard.html
-          cmp -s public/index.html public/dashboard.html
+          test -s public/index.html
+          cmp -s public/compare/index.html public/dashboard.html
+          cmp -s public/index.html /tmp/miraah-homepage-before.html
           python - <<'PY'
           from pathlib import Path
           import sys
           sys.path.insert(0, "scripts")
           import update_world_bank as wb
-          html = Path("public/dashboard.html").read_text(encoding="utf-8")
+          home = Path("public/index.html").read_text(encoding="utf-8")
+          assert "HOME_BOOT" in home or "home-hero" in home
+          assert "countrySearchA" not in home
+          html = Path("public/compare/index.html").read_text(encoding="utf-8")
           payload = wb.read_payload(html)
           assert "updatedAt" in payload
           assert len(payload["indicatorMeta"]) == 12
           assert len(payload["countries"]) >= 150
-          print("embedded DATA ok")
+          print("embedded DATA ok; homepage untouched")
           PY
 
-      - name: Commit only when data changed
+      - name: Commit only when comparison data changed
         run: |
-          if git diff --quiet -- public/index.html public/dashboard.html; then
+          if git diff --quiet -- public/compare/index.html public/dashboard.html; then
             echo "No data changes"
             exit 0
           fi
           git config user.name "miraah-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add public/index.html public/dashboard.html
+          git add public/compare/index.html public/dashboard.html
           git commit -m "chore: refresh World Bank data"
           git push

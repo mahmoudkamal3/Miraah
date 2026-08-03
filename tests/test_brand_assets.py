@@ -93,11 +93,16 @@ class BrandHtmlIntegrationTests(unittest.TestCase):
         cls.passport = (PUBLIC / "passport" / "index.html").read_text(encoding="utf-8")
         cls.malta = (PUBLIC / "passport" / "malta" / "index.html").read_text(encoding="utf-8")
 
-    def test_index_dashboard_byte_identical(self):
+    def test_compare_dashboard_byte_identical(self):
         self.assertEqual(
+            (PUBLIC / "compare" / "index.html").read_bytes(),
+            (PUBLIC / "dashboard.html").read_bytes(),
+        )
+        self.assertNotEqual(
             (PUBLIC / "index.html").read_bytes(),
             (PUBLIC / "dashboard.html").read_bytes(),
         )
+
 
     def test_favicon_links_on_all_routes(self):
         for label, html in (
@@ -135,8 +140,8 @@ class BrandHtmlIntegrationTests(unittest.TestCase):
             self.assertIn("logo-mark", html)
 
     def test_brand_strings_in_js(self):
-        self.assertIn("brand:'مرآة'", self.index)
-        self.assertIn("Mir\\u2019ah", self.index)
+        self.assertIn("brand:'مرآة'", self.dashboard)
+        self.assertIn("Mir\\u2019ah", self.dashboard)
         passport_js = (PUBLIC / "passport" / "assets" / "passport.js").read_text(encoding="utf-8")
         self.assertIn("brand:'مرآة'", passport_js)
         self.assertIn("Mir\\u2019ah", passport_js)

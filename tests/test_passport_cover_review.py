@@ -129,7 +129,7 @@ class PassportCoverReviewGateTests(unittest.TestCase):
         )
         self.assertEqual(malta["mobilityScore"], 159)
         self.assertEqual(malta["rank"], 6)
-        a = (ROOT / "public" / "index.html").read_bytes()
+        a = (ROOT / "public" / "compare" / "index.html").read_bytes()
         b = (ROOT / "public" / "dashboard.html").read_bytes()
         self.assertEqual(a, b)
 

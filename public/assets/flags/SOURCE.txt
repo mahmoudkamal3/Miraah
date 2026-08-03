@@ -1,0 +1,5 @@
+Flag SVGs sourced from flag-icons (lipis/flag-icons) v7.5.0.
+License: MIT — see LICENSE in this directory.
+Upstream: https://github.com/lipis/flag-icons
+Only ISO2 codes used by Mir’ah Passport Power are copied into this folder.
+_fallback.svg is a Mir’ah-designed placeholder (not from flag-icons).
