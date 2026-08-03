@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Mir&#8217;ah Mirror Portal app icon">
+  <defs>
+    <linearGradient id="mpBg" x1="8" y1="4" x2="56" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#102744"/>
+      <stop offset="100%" stop-color="#07111F"/>
+    </linearGradient>
+    <linearGradient id="mpGlass" x1="18" y1="10" x2="46" y2="54" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4AE0C0"/>
+      <stop offset="45%" stop-color="#2B9FFF"/>
+      <stop offset="100%" stop-color="#1A6FD4"/>
+    </linearGradient>
+    <linearGradient id="mpShine" x1="24" y1="14" x2="40" y2="50" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#E8FFF8" stop-opacity=".95"/>
+      <stop offset="50%" stop-color="#7EE7D0" stop-opacity=".5"/>
+      <stop offset="100%" stop-color="#2B9FFF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#mpBg)"/>
+  <rect x="18" y="8" width="28" height="48" rx="10" fill="url(#mpGlass)"/>
+  <path fill="url(#mpShine)" d="M26 12h8c1.1 0 2 .9 2 2v36c0 1.1-.9 2-2 2h-8c-1.1 0-2-.9-2-2V14c0-1.1.9-2 2-2z"/>
+  <ellipse cx="32" cy="32" rx="4" ry="7" fill="#07111F" opacity=".28"/>
+</svg>

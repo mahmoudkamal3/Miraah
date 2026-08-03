@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Mir&#8217;ah social card">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="55%" stop-color="#07111F"/>
+      <stop offset="100%" stop-color="#0c1f3a"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="200" y1="80" x2="900" y2="560" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38D6B0" stop-opacity=".18"/>
+      <stop offset="50%" stop-color="#2B9FFF" stop-opacity=".12"/>
+      <stop offset="100%" stop-color="#07111F" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="rmGrad" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4AE0C0"/>
+      <stop offset="42%" stop-color="#38D6B0"/>
+      <stop offset="50%" stop-color="#9AF0DC"/>
+      <stop offset="58%" stop-color="#2B9FFF"/>
+      <stop offset="100%" stop-color="#1A6FD4"/>
+    </linearGradient>
+    <clipPath id="lw"><rect width="32" height="64"/></clipPath>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="980" cy="90" r="220" fill="url(#glow)"/>
+  <circle cx="160" cy="540" r="180" fill="#38D6B0" opacity=".08"/>
+  <g transform="translate(120 175) scale(4.2)">
+    <path fill="url(#rmGrad)" d="M12 51.5V12.5h10.5C26.5 18.5 29.5 27 32 36C34.5 27 37.5 18.5 41.5 12.5H52V51.5H42.5V29C38.5 36.5 35 43 32 48C29 43 25.5 36.5 21.5 29V51.5H12Z"/>
+    <path fill="#E8FFF8" opacity=".22" clip-path="url(#lw)" d="M12 51.5V12.5h10.5C26.5 18.5 29.5 27 32 36C34.5 27 37.5 18.5 41.5 12.5H52V51.5H42.5V29C38.5 36.5 35 43 32 48C29 43 25.5 36.5 21.5 29V51.5H12Z"/>
+  </g>
+  <text x="430" y="265" fill="#ECF4FF" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="72" font-weight="750">مرآة</text>
+  <text x="430" y="345" fill="#ECF4FF" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="56" font-weight="700" letter-spacing="-0.02em">Mir&#8217;ah</text>
+  <text x="430" y="420" fill="#9BB4D0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="28" font-weight="500">قارن الدول بالأرقام</text>
+  <text x="430" y="465" fill="#8FA6BF" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="500">Compare countries through data</text>
+  <rect x="120" y="560" width="120" height="4" rx="2" fill="#38D6B0"/>
+  <rect x="250" y="560" width="80" height="4" rx="2" fill="#2B9FFF" opacity=".7"/>
+</svg>

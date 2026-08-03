@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Mir&#8217;ah app icon">
+  <defs>
+    <linearGradient id="rmBg" x1="8" y1="4" x2="56" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#102744"/>
+      <stop offset="100%" stop-color="#07111F"/>
+    </linearGradient>
+    <linearGradient id="rmGrad" x1="10" y1="10" x2="54" y2="54" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4AE0C0"/>
+      <stop offset="42%" stop-color="#38D6B0"/>
+      <stop offset="50%" stop-color="#9AF0DC"/>
+      <stop offset="58%" stop-color="#2B9FFF"/>
+      <stop offset="100%" stop-color="#1A6FD4"/>
+    </linearGradient>
+    <clipPath id="rmLeftWash"><rect x="0" y="0" width="32" height="64"/></clipPath>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#rmBg)"/>
+  <path fill="url(#rmGrad)" d="M12 51.5V12.5h10.5C26.5 18.5 29.5 27 32 36C34.5 27 37.5 18.5 41.5 12.5H52V51.5H42.5V29C38.5 36.5 35 43 32 48C29 43 25.5 36.5 21.5 29V51.5H12Z"/>
+  <path fill="#E8FFF8" opacity=".22" clip-path="url(#rmLeftWash)" d="M12 51.5V12.5h10.5C26.5 18.5 29.5 27 32 36C34.5 27 37.5 18.5 41.5 12.5H52V51.5H42.5V29C38.5 36.5 35 43 32 48C29 43 25.5 36.5 21.5 29V51.5H12Z"/>
+</svg>

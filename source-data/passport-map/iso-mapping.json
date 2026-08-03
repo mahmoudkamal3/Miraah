@@ -1,0 +1,1414 @@
+{
+  "generatedAt": "2026-08-03T15:54:12Z",
+  "source": "https://www.naturalearthdata.com/downloads/110m-cultural-vectors/110m-admin-0-countries/",
+  "license": "Public Domain (Natural Earth)",
+  "rows": [
+    {
+      "iso3": "AFG",
+      "nameEn": "Afghanistan",
+      "neMatchIso": "AFG",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "AGO",
+      "nameEn": "Angola",
+      "neMatchIso": "AGO",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "ALB",
+      "nameEn": "Albania",
+      "neMatchIso": "ALB",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "AND",
+      "nameEn": "Andorra",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "ARE",
+      "nameEn": "United Arab Emirates",
+      "neMatchIso": "ARE",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "ARG",
+      "nameEn": "Argentina",
+      "neMatchIso": "ARG",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "ARM",
+      "nameEn": "Armenia",
+      "neMatchIso": "ARM",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "ATG",
+      "nameEn": "Antigua and Barbuda",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "AUS",
+      "nameEn": "Australia",
+      "neMatchIso": "AUS",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "AUT",
+      "nameEn": "Austria",
+      "neMatchIso": "AUT",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "AZE",
+      "nameEn": "Azerbaijan",
+      "neMatchIso": "AZE",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "BDI",
+      "nameEn": "Burundi",
+      "neMatchIso": "BDI",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "BEL",
+      "nameEn": "Belgium",
+      "neMatchIso": "BEL",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "BEN",
+      "nameEn": "Benin",
+      "neMatchIso": "BEN",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "BFA",
+      "nameEn": "Burkina Faso",
+      "neMatchIso": "BFA",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "BGD",
+      "nameEn": "Bangladesh",
+      "neMatchIso": "BGD",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "BGR",
+      "nameEn": "Bulgaria",
+      "neMatchIso": "BGR",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "BHR",
+      "nameEn": "Bahrain",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "BHS",
+      "nameEn": "Bahamas",
+      "neMatchIso": "BHS",
+      "representation": "polygon+marker",
+      "notes": "Polygon present; marker added for click reliability."
+    },
+    {
+      "iso3": "BIH",
+      "nameEn": "Bosnia and Herzegovina",
+      "neMatchIso": "BIH",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "BLR",
+      "nameEn": "Belarus",
+      "neMatchIso": "BLR",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "BLZ",
+      "nameEn": "Belize",
+      "neMatchIso": "BLZ",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "BOL",
+      "nameEn": "Bolivia",
+      "neMatchIso": "BOL",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "BRA",
+      "nameEn": "Brazil",
+      "neMatchIso": "BRA",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "BRB",
+      "nameEn": "Barbados",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "BRN",
+      "nameEn": "Brunei",
+      "neMatchIso": "BRN",
+      "representation": "polygon+marker",
+      "notes": "Polygon present; marker added for click reliability."
+    },
+    {
+      "iso3": "BTN",
+      "nameEn": "Bhutan",
+      "neMatchIso": "BTN",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "BWA",
+      "nameEn": "Botswana",
+      "neMatchIso": "BWA",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "CAF",
+      "nameEn": "Central African Republic",
+      "neMatchIso": "CAF",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "CAN",
+      "nameEn": "Canada",
+      "neMatchIso": "CAN",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "CHE",
+      "nameEn": "Switzerland",
+      "neMatchIso": "CHE",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "CHL",
+      "nameEn": "Chile",
+      "neMatchIso": "CHL",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "CHN",
+      "nameEn": "China",
+      "neMatchIso": "CHN",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "CIV",
+      "nameEn": "Côte d’Ivoire",
+      "neMatchIso": "CIV",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "CMR",
+      "nameEn": "Cameroon",
+      "neMatchIso": "CMR",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "COD",
+      "nameEn": "DR Congo",
+      "neMatchIso": "COD",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "COG",
+      "nameEn": "Congo",
+      "neMatchIso": "COG",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "COL",
+      "nameEn": "Colombia",
+      "neMatchIso": "COL",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "COM",
+      "nameEn": "Comoros",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "CPV",
+      "nameEn": "Cabo Verde",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "CRI",
+      "nameEn": "Costa Rica",
+      "neMatchIso": "CRI",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "CUB",
+      "nameEn": "Cuba",
+      "neMatchIso": "CUB",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "CYP",
+      "nameEn": "Cyprus",
+      "neMatchIso": "CYP",
+      "representation": "polygon+marker",
+      "notes": "Polygon present; marker added for click reliability."
+    },
+    {
+      "iso3": "CZE",
+      "nameEn": "Czechia",
+      "neMatchIso": "CZE",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "DEU",
+      "nameEn": "Germany",
+      "neMatchIso": "DEU",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "DJI",
+      "nameEn": "Djibouti",
+      "neMatchIso": "DJI",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "DMA",
+      "nameEn": "Dominica",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "DNK",
+      "nameEn": "Denmark",
+      "neMatchIso": "DNK",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "DOM",
+      "nameEn": "Dominican Republic",
+      "neMatchIso": "DOM",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "DZA",
+      "nameEn": "Algeria",
+      "neMatchIso": "DZA",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "ECU",
+      "nameEn": "Ecuador",
+      "neMatchIso": "ECU",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "EGY",
+      "nameEn": "Egypt",
+      "neMatchIso": "EGY",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "ERI",
+      "nameEn": "Eritrea",
+      "neMatchIso": "ERI",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "ESP",
+      "nameEn": "Spain",
+      "neMatchIso": "ESP",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "EST",
+      "nameEn": "Estonia",
+      "neMatchIso": "EST",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "ETH",
+      "nameEn": "Ethiopia",
+      "neMatchIso": "ETH",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "FIN",
+      "nameEn": "Finland",
+      "neMatchIso": "FIN",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "FJI",
+      "nameEn": "Fiji",
+      "neMatchIso": "FJI",
+      "representation": "polygon+marker",
+      "notes": "Polygon present; marker added for click reliability."
+    },
+    {
+      "iso3": "FRA",
+      "nameEn": "France",
+      "neMatchIso": "FRA",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "FSM",
+      "nameEn": "Micronesia",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "GAB",
+      "nameEn": "Gabon",
+      "neMatchIso": "GAB",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "GBR",
+      "nameEn": "United Kingdom",
+      "neMatchIso": "GBR",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "GEO",
+      "nameEn": "Georgia",
+      "neMatchIso": "GEO",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "GHA",
+      "nameEn": "Ghana",
+      "neMatchIso": "GHA",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "GIN",
+      "nameEn": "Guinea",
+      "neMatchIso": "GIN",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "GMB",
+      "nameEn": "Gambia",
+      "neMatchIso": "GMB",
+      "representation": "polygon+marker",
+      "notes": "Polygon present; marker added for click reliability."
+    },
+    {
+      "iso3": "GNB",
+      "nameEn": "Guinea-Bissau",
+      "neMatchIso": "GNB",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "GNQ",
+      "nameEn": "Equatorial Guinea",
+      "neMatchIso": "GNQ",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "GRC",
+      "nameEn": "Greece",
+      "neMatchIso": "GRC",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "GRD",
+      "nameEn": "Grenada",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "GTM",
+      "nameEn": "Guatemala",
+      "neMatchIso": "GTM",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "GUY",
+      "nameEn": "Guyana",
+      "neMatchIso": "GUY",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "HKG",
+      "nameEn": "Hong Kong",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "HND",
+      "nameEn": "Honduras",
+      "neMatchIso": "HND",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "HRV",
+      "nameEn": "Croatia",
+      "neMatchIso": "HRV",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "HTI",
+      "nameEn": "Haiti",
+      "neMatchIso": "HTI",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "HUN",
+      "nameEn": "Hungary",
+      "neMatchIso": "HUN",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "IDN",
+      "nameEn": "Indonesia",
+      "neMatchIso": "IDN",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "IND",
+      "nameEn": "India",
+      "neMatchIso": "IND",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "IRL",
+      "nameEn": "Ireland",
+      "neMatchIso": "IRL",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "IRN",
+      "nameEn": "Iran",
+      "neMatchIso": "IRN",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "IRQ",
+      "nameEn": "Iraq",
+      "neMatchIso": "IRQ",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "ISL",
+      "nameEn": "Iceland",
+      "neMatchIso": "ISL",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "ISR",
+      "nameEn": "Israel",
+      "neMatchIso": "ISR",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "ITA",
+      "nameEn": "Italy",
+      "neMatchIso": "ITA",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "JAM",
+      "nameEn": "Jamaica",
+      "neMatchIso": "JAM",
+      "representation": "polygon+marker",
+      "notes": "Polygon present; marker added for click reliability."
+    },
+    {
+      "iso3": "JOR",
+      "nameEn": "Jordan",
+      "neMatchIso": "JOR",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "JPN",
+      "nameEn": "Japan",
+      "neMatchIso": "JPN",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "KAZ",
+      "nameEn": "Kazakhstan",
+      "neMatchIso": "KAZ",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "KEN",
+      "nameEn": "Kenya",
+      "neMatchIso": "KEN",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "KGZ",
+      "nameEn": "Kyrgyzstan",
+      "neMatchIso": "KGZ",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "KHM",
+      "nameEn": "Cambodia",
+      "neMatchIso": "KHM",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "KIR",
+      "nameEn": "Kiribati",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "KNA",
+      "nameEn": "Saint Kitts and Nevis",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "KOR",
+      "nameEn": "South Korea",
+      "neMatchIso": "KOR",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "KWT",
+      "nameEn": "Kuwait",
+      "neMatchIso": "KWT",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "LAO",
+      "nameEn": "Laos",
+      "neMatchIso": "LAO",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "LBN",
+      "nameEn": "Lebanon",
+      "neMatchIso": "LBN",
+      "representation": "polygon+marker",
+      "notes": "Polygon present; marker added for click reliability."
+    },
+    {
+      "iso3": "LBR",
+      "nameEn": "Liberia",
+      "neMatchIso": "LBR",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "LBY",
+      "nameEn": "Libya",
+      "neMatchIso": "LBY",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "LCA",
+      "nameEn": "Saint Lucia",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "LIE",
+      "nameEn": "Liechtenstein",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "LKA",
+      "nameEn": "Sri Lanka",
+      "neMatchIso": "LKA",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "LSO",
+      "nameEn": "Lesotho",
+      "neMatchIso": "LSO",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "LTU",
+      "nameEn": "Lithuania",
+      "neMatchIso": "LTU",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "LUX",
+      "nameEn": "Luxembourg",
+      "neMatchIso": "LUX",
+      "representation": "polygon+marker",
+      "notes": "Polygon present; marker added for click reliability."
+    },
+    {
+      "iso3": "LVA",
+      "nameEn": "Latvia",
+      "neMatchIso": "LVA",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "MAC",
+      "nameEn": "Macao",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "MAR",
+      "nameEn": "Morocco",
+      "neMatchIso": "MAR",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "MCO",
+      "nameEn": "Monaco",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "MDA",
+      "nameEn": "Moldova",
+      "neMatchIso": "MDA",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "MDG",
+      "nameEn": "Madagascar",
+      "neMatchIso": "MDG",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "MDV",
+      "nameEn": "Maldives",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "MEX",
+      "nameEn": "Mexico",
+      "neMatchIso": "MEX",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "MHL",
+      "nameEn": "Marshall Islands",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "MKD",
+      "nameEn": "North Macedonia",
+      "neMatchIso": "MKD",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "MLI",
+      "nameEn": "Mali",
+      "neMatchIso": "MLI",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "MLT",
+      "nameEn": "Malta",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "MMR",
+      "nameEn": "Myanmar",
+      "neMatchIso": "MMR",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "MNE",
+      "nameEn": "Montenegro",
+      "neMatchIso": "MNE",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "MNG",
+      "nameEn": "Mongolia",
+      "neMatchIso": "MNG",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "MOZ",
+      "nameEn": "Mozambique",
+      "neMatchIso": "MOZ",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "MRT",
+      "nameEn": "Mauritania",
+      "neMatchIso": "MRT",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "MUS",
+      "nameEn": "Mauritius",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "MWI",
+      "nameEn": "Malawi",
+      "neMatchIso": "MWI",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "MYS",
+      "nameEn": "Malaysia",
+      "neMatchIso": "MYS",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "NAM",
+      "nameEn": "Namibia",
+      "neMatchIso": "NAM",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "NER",
+      "nameEn": "Niger",
+      "neMatchIso": "NER",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "NGA",
+      "nameEn": "Nigeria",
+      "neMatchIso": "NGA",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "NIC",
+      "nameEn": "Nicaragua",
+      "neMatchIso": "NIC",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "NLD",
+      "nameEn": "Netherlands",
+      "neMatchIso": "NLD",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "NOR",
+      "nameEn": "Norway",
+      "neMatchIso": "NOR",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "NPL",
+      "nameEn": "Nepal",
+      "neMatchIso": "NPL",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "NRU",
+      "nameEn": "Nauru",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "NZL",
+      "nameEn": "New Zealand",
+      "neMatchIso": "NZL",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "OMN",
+      "nameEn": "Oman",
+      "neMatchIso": "OMN",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "PAK",
+      "nameEn": "Pakistan",
+      "neMatchIso": "PAK",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "PAN",
+      "nameEn": "Panama",
+      "neMatchIso": "PAN",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "PER",
+      "nameEn": "Peru",
+      "neMatchIso": "PER",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "PHL",
+      "nameEn": "Philippines",
+      "neMatchIso": "PHL",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "PLW",
+      "nameEn": "Palau",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "PNG",
+      "nameEn": "Papua New Guinea",
+      "neMatchIso": "PNG",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "POL",
+      "nameEn": "Poland",
+      "neMatchIso": "POL",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "PRK",
+      "nameEn": "North Korea",
+      "neMatchIso": "PRK",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "PRT",
+      "nameEn": "Portugal",
+      "neMatchIso": "PRT",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "PRY",
+      "nameEn": "Paraguay",
+      "neMatchIso": "PRY",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "PSE",
+      "nameEn": "Palestine",
+      "neMatchIso": "PSE",
+      "representation": "polygon+marker",
+      "notes": "Polygon present; marker added for click reliability."
+    },
+    {
+      "iso3": "QAT",
+      "nameEn": "Qatar",
+      "neMatchIso": "QAT",
+      "representation": "polygon+marker",
+      "notes": "Polygon present; marker added for click reliability."
+    },
+    {
+      "iso3": "ROU",
+      "nameEn": "Romania",
+      "neMatchIso": "ROU",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "RUS",
+      "nameEn": "Russia",
+      "neMatchIso": "RUS",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "RWA",
+      "nameEn": "Rwanda",
+      "neMatchIso": "RWA",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "SAU",
+      "nameEn": "Saudi Arabia",
+      "neMatchIso": "SAU",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "SDN",
+      "nameEn": "Sudan",
+      "neMatchIso": "SDN",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "SEN",
+      "nameEn": "Senegal",
+      "neMatchIso": "SEN",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "SGP",
+      "nameEn": "Singapore",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "SLB",
+      "nameEn": "Solomon Islands",
+      "neMatchIso": "SLB",
+      "representation": "polygon+marker",
+      "notes": "Polygon present; marker added for click reliability."
+    },
+    {
+      "iso3": "SLE",
+      "nameEn": "Sierra Leone",
+      "neMatchIso": "SLE",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "SLV",
+      "nameEn": "El Salvador",
+      "neMatchIso": "SLV",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "SMR",
+      "nameEn": "San Marino",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "SOM",
+      "nameEn": "Somalia",
+      "neMatchIso": "SOM",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "SRB",
+      "nameEn": "Serbia",
+      "neMatchIso": "SRB",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "SSD",
+      "nameEn": "South Sudan",
+      "neMatchIso": "SSD",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "STP",
+      "nameEn": "São Tomé and Príncipe",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "SUR",
+      "nameEn": "Suriname",
+      "neMatchIso": "SUR",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "SVK",
+      "nameEn": "Slovakia",
+      "neMatchIso": "SVK",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "SVN",
+      "nameEn": "Slovenia",
+      "neMatchIso": "SVN",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "SWE",
+      "nameEn": "Sweden",
+      "neMatchIso": "SWE",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "SWZ",
+      "nameEn": "Eswatini",
+      "neMatchIso": "SWZ",
+      "representation": "polygon+marker",
+      "notes": "Polygon present; marker added for click reliability."
+    },
+    {
+      "iso3": "SYC",
+      "nameEn": "Seychelles",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "SYR",
+      "nameEn": "Syria",
+      "neMatchIso": "SYR",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "TCD",
+      "nameEn": "Chad",
+      "neMatchIso": "TCD",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "TGO",
+      "nameEn": "Togo",
+      "neMatchIso": "TGO",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "THA",
+      "nameEn": "Thailand",
+      "neMatchIso": "THA",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "TJK",
+      "nameEn": "Tajikistan",
+      "neMatchIso": "TJK",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "TKM",
+      "nameEn": "Turkmenistan",
+      "neMatchIso": "TKM",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "TLS",
+      "nameEn": "Timor-Leste",
+      "neMatchIso": "TLS",
+      "representation": "polygon+marker",
+      "notes": "Polygon present; marker added for click reliability."
+    },
+    {
+      "iso3": "TON",
+      "nameEn": "Tonga",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "TTO",
+      "nameEn": "Trinidad and Tobago",
+      "neMatchIso": "TTO",
+      "representation": "polygon+marker",
+      "notes": "Polygon present; marker added for click reliability."
+    },
+    {
+      "iso3": "TUN",
+      "nameEn": "Tunisia",
+      "neMatchIso": "TUN",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "TUR",
+      "nameEn": "Türkiye",
+      "neMatchIso": "TUR",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "TUV",
+      "nameEn": "Tuvalu",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "TWN",
+      "nameEn": "Taiwan",
+      "neMatchIso": "TWN",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "TZA",
+      "nameEn": "Tanzania",
+      "neMatchIso": "TZA",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "UGA",
+      "nameEn": "Uganda",
+      "neMatchIso": "UGA",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "UKR",
+      "nameEn": "Ukraine",
+      "neMatchIso": "UKR",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "URY",
+      "nameEn": "Uruguay",
+      "neMatchIso": "URY",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "USA",
+      "nameEn": "United States",
+      "neMatchIso": "USA",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "UZB",
+      "nameEn": "Uzbekistan",
+      "neMatchIso": "UZB",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "VAT",
+      "nameEn": "Vatican City",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "VCT",
+      "nameEn": "Saint Vincent and the Grenadines",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "VEN",
+      "nameEn": "Venezuela",
+      "neMatchIso": "VEN",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "VNM",
+      "nameEn": "Vietnam",
+      "neMatchIso": "VNM",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "VUT",
+      "nameEn": "Vanuatu",
+      "neMatchIso": "VUT",
+      "representation": "polygon+marker",
+      "notes": "Polygon present; marker added for click reliability."
+    },
+    {
+      "iso3": "WSM",
+      "nameEn": "Samoa",
+      "neMatchIso": null,
+      "representation": "marker",
+      "notes": "Explicit curated marker; no reliable 110m polygon."
+    },
+    {
+      "iso3": "XKX",
+      "nameEn": "Kosovo",
+      "neMatchIso": "XKX",
+      "representation": "polygon+marker",
+      "notes": "Polygon present; marker added for click reliability."
+    },
+    {
+      "iso3": "YEM",
+      "nameEn": "Yemen",
+      "neMatchIso": "YEM",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "ZAF",
+      "nameEn": "South Africa",
+      "neMatchIso": "ZAF",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "ZMB",
+      "nameEn": "Zambia",
+      "neMatchIso": "ZMB",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    },
+    {
+      "iso3": "ZWE",
+      "nameEn": "Zimbabwe",
+      "neMatchIso": "ZWE",
+      "representation": "polygon",
+      "notes": "Direct Natural Earth Admin 0 polygon."
+    }
+  ],
+  "notMappable": [],
+  "disputedNotesSample": [
+    "W. Sahara: BRK_A3=B28 ISO_A3=ESH",
+    "Papua New Guinea: BRK_A3=PN1 ISO_A3=PNG",
+    "Falkland Is.: BRK_A3=B12 ISO_A3=FLK",
+    "Norway: BRK_A3=NOR ISO_A3=-99",
+    "France: BRK_A3=FRA ISO_A3=-99",
+    "Palestine: BRK_A3=PSX ISO_A3=PSE",
+    "Portugal: BRK_A3=PR1 ISO_A3=PRT",
+    "N. Cyprus: BRK_A3=CYN ISO_A3=-99",
+    "Somaliland: BRK_A3=SOL ISO_A3=-99",
+    "Kosovo: BRK_A3=KOS ISO_A3=-99",
+    "S. Sudan: BRK_A3=SDS ISO_A3=SSD"
+  ]
+}

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Mir&#8217;ah Mirror Portal monochrome">
+  <rect x="18" y="8" width="28" height="48" rx="10" fill="#07111F"/>
+  <path fill="#07111F" opacity=".35" d="M26 12h8c1.1 0 2 .9 2 2v36c0 1.1-.9 2-2 2h-8c-1.1 0-2-.9-2-2V14c0-1.1.9-2 2-2z"/>
+  <ellipse cx="32" cy="32" rx="4" ry="7" fill="#FFFFFF" opacity=".35"/>
+</svg>

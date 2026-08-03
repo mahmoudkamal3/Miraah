@@ -1,0 +1,73 @@
+name: Update passport data
+
+on:
+  schedule:
+    - cron: "41 6 2 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: passport-data-update
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run passport unit tests
+        run: python -m unittest tests.test_passport_data tests.test_passport_pages -v
+
+      - name: Dry-run validation
+        run: python scripts/update_passport_data.py --refresh-source --dry-run
+
+      - name: Refresh passport data
+        run: python scripts/update_passport_data.py --refresh-source --write
+
+      - name: Render passport pages
+        run: python scripts/render_passport_pages.py
+
+      - name: Verify outputs
+        run: |
+          test -s public/data/passports/index.json
+          test -s public/data/passports/meta.json
+          test -s public/passport/index.html
+          test -s public/sitemap.xml
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          index = json.loads(Path("public/data/passports/index.json").read_text(encoding="utf-8"))
+          meta = json.loads(Path("public/data/passports/meta.json").read_text(encoding="utf-8"))
+          assert meta.get("provisional") is True
+          assert len(index["passports"]) >= 150
+          assert "datasetUpdateDate" in meta
+          assert "retrievalTimestampUtc" in meta
+          assert meta.get("requirementAudit", {}).get("unknownCount", 1) == 0
+          print("passport outputs ok")
+          PY
+
+      - name: Commit only when data or pages changed
+        run: |
+          if git diff --quiet -- \
+            public/data/passports \
+            public/passport \
+            public/sitemap.xml \
+            source-data/passport-index-data; then
+            echo "No passport data changes"
+            exit 0
+          fi
+          git config user.name "miraah-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add public/data/passports public/passport public/sitemap.xml source-data/passport-index-data
+          git commit -m "chore: refresh passport mobility data"
+          git push

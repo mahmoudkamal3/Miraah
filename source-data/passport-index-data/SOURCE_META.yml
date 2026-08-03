@@ -1,0 +1,12 @@
+source_repository: https://github.com/imorte/passport-index-data
+preferred_file: passport-index-tidy-iso3.csv
+license: MIT
+dataset_update_date: 2026-02-17
+dataset_update_note: Declared in upstream README as "Last updated: 17 February 2026"
+retrieval_timestamp_utc: 2026-08-03T12:40:59Z
+retrieved_files:
+  - passport-index-tidy-iso3.csv
+  - LICENSE
+  - README.md
+provisional: true
+commercial_note: Upstream dataset is provisional for Mir'ah MVP. Separate upstream-rights review required before commercial monetization. Underlying data is scraped from passportindex.org.

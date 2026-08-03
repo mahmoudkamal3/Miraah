@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Mir&#8217;ah Data Mirror monochrome">
+  <path fill="#07111F" d="M28.5 32c0 8.2-5.4 14.2-14 16.2-1.3.3-2.5-.7-2.5-2V17.8c0-1.3 1.2-2.3 2.5-2 8.6 2 14 8 14 16.2z"/>
+  <path fill="#07111F" d="M35.5 32c0 8.2 5.4 14.2 14 16.2 1.3.3 2.5-.7 2.5-2V17.8c0-1.3-1.2-2.3-2.5-2-8.6 2-14 8-14 16.2z"/>
+  <circle cx="32" cy="32" r="5.2" fill="#07111F" opacity=".55"/>
+  <circle cx="32" cy="32" r="2.2" fill="#07111F" opacity=".2"/>
+</svg>

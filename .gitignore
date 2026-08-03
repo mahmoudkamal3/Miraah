@@ -69,3 +69,16 @@ venv/
 # OS / misc
 *.bak
 *.orig
+
+# Passport-cover audit generated artifacts (local only; never deploy)
+source-data/passport-covers/originals/
+source-data/passport-covers/staged/
+source-data/passport-covers/cache/
+source-data/passport-covers/review/thumbs/
+source-data/passport-covers/review/tool/
+source-data/passport-covers/**/*.log
+source-data/passport-covers/manual-review/thumbs/
+
+# Passport map build scratch (downloaded Natural Earth archives)
+source-data/passport-map/raw/
+source-data/passport-map/tmp/

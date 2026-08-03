@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <title>Mir&#8217;ah Brand Lab — Logo Exploration (local only)</title>
+  <style>
+    :root {
+      --bg: #07111f;
+      --panel: #102744;
+      --line: rgba(148, 183, 224, .22);
+      --text: #ecf4ff;
+      --muted: #9bb4d0;
+      --cyan: #38d6b0;
+      --blue: #2b9fff;
+      --surface: #0a1628;
+      --chip: #143052;
+      --ok: #7ee7d0;
+      --bad: #ff8a8a;
+      --warn: #ffd27a;
+      --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    html.light {
+      --bg: #eef4fb;
+      --panel: #ffffff;
+      --line: rgba(7, 17, 31, .12);
+      --text: #07111f;
+      --muted: #4a6280;
+      --surface: #f7fafc;
+      --chip: #d9e6f5;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background:
+        radial-gradient(900px 420px at 10% -10%, rgba(56, 214, 176, .12), transparent 60%),
+        radial-gradient(700px 380px at 90% 0%, rgba(43, 159, 255, .12), transparent 55%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+    }
+    .wrap { max-width: 1240px; margin: 0 auto; padding: 24px 20px 80px; }
+    h1 { margin: 8px 0 6px; font-size: 1.55rem; font-weight: 700; letter-spacing: -.02em; }
+    .lede { margin: 0; color: var(--muted); max-width: 62ch; font-size: .95rem; }
+    .badge {
+      display: inline-block; padding: 4px 10px; border-radius: 999px;
+      background: rgba(56,214,176,.15); color: var(--cyan);
+      font-size: .72rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+    }
+    .status {
+      display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+      margin: 16px 0 14px; padding: 12px 14px; border-radius: 12px;
+      border: 1px solid var(--line); background: var(--panel); font-size: .9rem; font-weight: 600;
+    }
+    .status .ok { color: var(--ok); }
+    .status .bad { color: var(--bad); }
+    .status .pending { color: var(--warn); }
+    .error-panel {
+      display: none; margin: 0 0 18px; padding: 14px 16px; border-radius: 12px;
+      border: 1px solid color-mix(in srgb, var(--bad) 55%, transparent);
+      background: color-mix(in srgb, var(--bad) 12%, transparent); color: var(--bad);
+      font-size: .88rem;
+    }
+    .error-panel.show { display: block; }
+    .error-panel ul { margin: 8px 0 0; padding-left: 1.2rem; }
+    .controls {
+      position: sticky; top: 0; z-index: 20;
+      display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+      padding: 12px 14px; margin: 0 0 20px;
+      background: color-mix(in srgb, var(--panel) 92%, transparent);
+      border: 1px solid var(--line); border-radius: 14px; backdrop-filter: blur(10px);
+    }
+    .controls label { font-size: .78rem; color: var(--muted); display: flex; flex-direction: column; gap: 4px; }
+    .controls select, .controls button, .seg button {
+      appearance: none; border: 1px solid var(--line); background: var(--chip); color: var(--text);
+      border-radius: 10px; padding: 8px 12px; font: inherit; font-size: .88rem; cursor: pointer;
+    }
+    .seg { display: inline-flex; gap: 4px; background: var(--surface); padding: 4px; border-radius: 12px; border: 1px solid var(--line); }
+    .seg button.active { background: linear-gradient(135deg, #1a9f82, #2b7fff); color: #fff; border-color: transparent; }
+    .note {
+      margin: 0 0 20px; padding: 12px 14px; border-radius: 12px;
+      border: 1px dashed color-mix(in srgb, var(--cyan) 45%, var(--line));
+      background: color-mix(in srgb, var(--cyan) 8%, transparent);
+      color: var(--muted); font-size: .88rem;
+    }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    @media (max-width: 980px) { .grid-3 { grid-template-columns: 1fr; } }
+    .card {
+      background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 16px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .card h2 { margin: 0; font-size: 1.08rem; letter-spacing: -.01em; }
+    .card .tag { color: var(--muted); font-size: .78rem; font-weight: 600; }
+    .card p.why { margin: 0; color: var(--muted); font-size: .88rem; min-height: 4.5em; }
+    .stage {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 160px; border-radius: 12px; border: 1px solid var(--line);
+      background: var(--surface); padding: 18px;
+    }
+    .mark { width: var(--mark-size, 96px); height: var(--mark-size, 96px); display: block; }
+    .lockup { width: min(100%, 280px); height: auto; display: block; }
+    .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .swatch {
+      width: 56px; height: 56px; border-radius: 12px; border: 1px solid var(--line);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .dl a {
+      font-size: .76rem; color: var(--blue); text-decoration: none;
+      border: 1px solid var(--line); padding: 5px 8px; border-radius: 8px; background: var(--surface);
+    }
+    .dl a:hover { border-color: var(--cyan); color: var(--cyan); }
+    section.block { margin-top: 32px; }
+    section.block h3 { margin: 0 0 12px; font-size: 1.02rem; }
+    section.block h3 span { color: var(--muted); font-weight: 500; font-size: .8rem; margin-left: 8px; }
+    .compare-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    @media (max-width: 900px) { .compare-row { grid-template-columns: 1fr; } }
+    .sim-browser { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: var(--panel); }
+    .sim-chrome {
+      display: flex; gap: 8px; align-items: center; padding: 8px 10px;
+      background: color-mix(in srgb, var(--chip) 80%, #000 10%);
+      border-bottom: 1px solid var(--line); font-size: .75rem; color: var(--muted);
+    }
+    .dots { display: flex; gap: 5px; }
+    .dots i { width: 8px; height: 8px; border-radius: 50%; display: block; background: #666; }
+    .dots i:nth-child(1) { background: #ff5f57; }
+    .dots i:nth-child(2) { background: #febc2e; }
+    .dots i:nth-child(3) { background: #28c840; }
+    .tab {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 10px; border-radius: 8px 8px 0 0;
+      background: var(--surface); border: 1px solid var(--line); border-bottom: 0;
+      color: var(--text); max-width: 180px; font-weight: 600;
+    }
+    .tab img { width: 16px; height: 16px; }
+    .sim-body { padding: 12px 14px; font-size: .85rem; color: var(--muted); }
+    .header-sim {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 10px 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface);
+    }
+    .header-sim .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: -.02em; }
+    .header-sim .brand img { width: 28px; height: 28px; }
+    .header-sim.desktop .brand img { width: 32px; height: 32px; }
+    .header-sim .nav { display: flex; gap: 14px; color: var(--muted); font-size: .85rem; }
+    .header-sim.mobile .nav { display: none; }
+    .burger { width: 22px; height: 14px; border-top: 2px solid var(--muted); border-bottom: 2px solid var(--muted); position: relative; }
+    .burger::before { content: ""; position: absolute; left: 0; right: 0; top: 4px; border-top: 2px solid var(--muted); }
+    .sizes { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; }
+    .size-cell { text-align: center; padding: 12px 8px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); }
+    .size-cell .frame { display: flex; align-items: center; justify-content: center; height: 100px; margin-bottom: 8px; }
+    .size-cell .label { font-size: .72rem; color: var(--muted); }
+    .social { width: 192px; height: 192px; border-radius: 24px; overflow: hidden; border: 1px solid var(--line); }
+    .social img { width: 100%; height: 100%; display: block; }
+    .test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    @media (max-width: 800px) { .test-grid { grid-template-columns: 1fr; } }
+    .test-panel { border-radius: 12px; border: 1px solid var(--line); padding: 14px; background: var(--panel); }
+    .test-panel h4 { margin: 0 0 10px; font-size: .9rem; }
+    .gray-filter { filter: grayscale(1); }
+    html:not(.light) .one-color img { filter: brightness(0) invert(1); }
+    html.light .one-color img { filter: brightness(0); }
+    .contrast-table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+    .contrast-table th, .contrast-table td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    .contrast-table th { color: var(--muted); font-weight: 600; }
+    footer.lab-foot { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
+    [data-lang="ar"] .en-only { display: none !important; }
+    [data-lang="en"] .ar-only { display: none !important; }
+    .board-hidden { opacity: .35; pointer-events: none; }
+    img.broken-placeholder {
+      outline: 2px solid var(--bad); background:
+        repeating-linear-gradient(45deg, transparent, transparent 4px, rgba(255,138,138,.25) 4px, rgba(255,138,138,.25) 8px);
+    }
+  </style>
+</head>
+<body data-lang="en">
+  <div class="wrap">
+    <div class="badge">Local only · not in production</div>
+    <div class="badge" style="margin-inline-start:8px;background:rgba(56,214,176,.25)">Selected for production: Reflected M</div>
+    <h1>Mir&#8217;ah / مرآة — Logo Exploration Board</h1>
+    <p class="lede">Reflected M is the official Mir’ah mark. Data Mirror and Mirror Portal remain archive explorations only — not shipped in <code>public/</code>.</p>
+
+    <div class="status" id="statusBar" aria-live="polite">
+      <span class="pending" id="statusChecks">Asset checks: …</span>
+      <span class="pending" id="statusBroken">Broken images: …</span>
+    </div>
+    <div class="error-panel" id="errorPanel" role="alert">
+      <strong>Asset validation failed</strong>
+      <ul id="errorList"></ul>
+    </div>
+
+    <div class="controls" role="toolbar" aria-label="Board controls">
+      <div class="seg" role="group" aria-label="Language">
+        <button type="button" data-set-lang="en" class="active">EN</button>
+        <button type="button" data-set-lang="ar">AR</button>
+      </div>
+      <div class="seg" role="group" aria-label="Theme">
+        <button type="button" data-set-theme="dark" class="active">Dark</button>
+        <button type="button" data-set-theme="light">Light</button>
+      </div>
+      <label>Preview size
+        <select id="sizeSelect">
+          <option value="16">16×16 favicon</option>
+          <option value="24">24×24</option>
+          <option value="32">32×32</option>
+          <option value="48">48×48</option>
+          <option value="96" selected>96×96</option>
+          <option value="192">192×192 / social</option>
+          <option value="28">Header (~28)</option>
+        </select>
+      </label>
+      <button type="button" id="revalidate">Re-run asset checks</button>
+    </div>
+
+    <p class="note">
+      Lives under <code>design/brand-lab/</code> only. Winner recommendation appears only after all assets pass validation.
+    </p>
+
+    <div id="boardRoot">
+      <div class="grid-3" id="concepts"></div>
+
+      <section class="block">
+        <h3>Size ladder <span>16 · 24 · 32 · 48 · 96 · 192</span></h3>
+        <div class="compare-row" id="sizeLadder"></div>
+      </section>
+
+      <section class="block">
+        <h3>Browser tab simulation</h3>
+        <div class="compare-row" id="tabs"></div>
+      </section>
+
+      <section class="block">
+        <h3>Mobile header</h3>
+        <div class="compare-row" id="mobileHeaders"></div>
+      </section>
+
+      <section class="block">
+        <h3>Desktop header</h3>
+        <div class="compare-row" id="desktopHeaders"></div>
+      </section>
+
+      <section class="block">
+        <h3>App icon / social profile</h3>
+        <div class="compare-row" id="socialRow"></div>
+      </section>
+
+      <section class="block">
+        <h3>Grayscale &amp; one-color</h3>
+        <div class="test-grid">
+          <div class="test-panel"><h4>Full color</h4><div class="row" id="testColor"></div></div>
+          <div class="test-panel"><h4>Grayscale</h4><div class="row gray-filter" id="testGray"></div></div>
+          <div class="test-panel"><h4>One-color</h4><div class="row one-color" id="testOne"></div></div>
+        </div>
+      </section>
+
+      <section class="block">
+        <h3>Accessibility / contrast notes</h3>
+        <div class="card">
+          <table class="contrast-table">
+            <thead><tr><th>Pairing</th><th>Observation</th><th>Guidance</th></tr></thead>
+            <tbody>
+              <tr><td>Cyan/blue on navy</td><td>Strong for dark UI</td><td>Primary product context</td></tr>
+              <tr><td>Mark on light</td><td>Readable</td><td>Use light lockups (navy type)</td></tr>
+              <tr><td>16×16</td><td>Reflected M &amp; Data Mirror hold silhouette; Portal keeps plate + shine band</td><td>Prefer app-icon tile in tabs</td></tr>
+              <tr><td>Wordmark</td><td>Modern system sans; apostrophe via typographic quote</td><td>No external webfonts</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="block" id="opinionSection" hidden>
+        <h3>Design opinion <span>only after assets pass · not integrated</span></h3>
+        <div class="card">
+          <p style="margin:0;color:var(--muted)" id="opinionText"></p>
+        </div>
+      </section>
+    </div>
+
+    <footer class="lab-foot">
+      Palette: cyan · teal · blue · navy. Validation: <code>design/scripts/validate_brand_lab.py</code>. Live platform untouched.
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      const CONCEPTS = [
+        {
+          id: "01-reflected-m",
+          name: "Reflected M",
+          why: "Soft filled M built as two reflected halves with a narrow optical gap — mirror axis without a pause bar or code-bracket silhouette. Readable at favicon size."
+        },
+        {
+          id: "02-data-mirror",
+          name: "Data Mirror",
+          why: "Two facing soft data/country profiles around a shared comparison lens. Expresses pairing without bars, equalizers, or database glyphs."
+        },
+        {
+          id: "03-mirror-portal",
+          name: "Mirror Portal",
+          why: "Rounded mirror plate with a bright reflected light plane and soft central opening. Premium portal feel — not a padlock, arch logo, or doorway brand."
+        }
+      ];
+
+      const ASSETS = [];
+      CONCEPTS.forEach(function (c) {
+        ["mark.svg", "mark-mono.svg", "app-icon.svg", "lockup-ar.svg", "lockup-en.svg", "lockup-ar-light.svg", "lockup-en-light.svg"].forEach(function (f) {
+          ASSETS.push("concepts/" + c.id + "/" + f);
+        });
+      });
+
+      const body = document.body;
+      const sizeSelect = document.getElementById("sizeSelect");
+
+      function theme() {
+        return document.documentElement.classList.contains("light") ? "light" : "dark";
+      }
+
+      function asset(c, file) {
+        return "concepts/" + c.id + "/" + file;
+      }
+
+      function imgTag(src, attrs) {
+        attrs = attrs || {};
+        var a = Object.keys(attrs).map(function (k) { return k + '="' + attrs[k] + '"'; }).join(" ");
+        return '<img src="' + src + '" ' + a + ' loading="eager" decoding="sync"/>';
+      }
+
+      function buildConcepts() {
+        document.getElementById("concepts").innerHTML = CONCEPTS.map(function (c) {
+          return (
+            '<article class="card" data-concept="' + c.id + '">' +
+              '<div><div class="tag">Concept</div><h2>' + c.name + '</h2></div>' +
+              '<p class="why">' + c.why + '</p>' +
+              '<div class="stage">' + imgTag(asset(c, "mark.svg"), { class: "mark", "data-role": "preview", alt: c.name + " mark" }) + '</div>' +
+              '<div>' +
+                imgTag(asset(c, "lockup-ar.svg"), { class: "lockup ar-only", "data-lockup-ar": "", alt: "مرآة" }) +
+                imgTag(asset(c, "lockup-en.svg"), { class: "lockup en-only", "data-lockup-en": "", alt: "Mir’ah" }) +
+              '</div>' +
+              '<div class="row">' +
+                '<div class="swatch" style="background:#07111f">' + imgTag(asset(c, "mark.svg"), { width: 36, height: 36, alt: "dark" }) + '</div>' +
+                '<div class="swatch" style="background:#eef4fb">' + imgTag(asset(c, "mark.svg"), { width: 36, height: 36, alt: "light" }) + '</div>' +
+                '<div class="swatch" style="background:#102744">' + imgTag(asset(c, "mark-mono.svg"), { width: 36, height: 36, alt: "mono", style: "filter:invert(1)" }) + '</div>' +
+                '<div class="swatch" style="background:#07111f;padding:0;overflow:hidden;border-radius:12px">' + imgTag(asset(c, "app-icon.svg"), { width: 56, height: 56, alt: "app" }) + '</div>' +
+              '</div>' +
+              '<div class="dl row">' +
+                '<a href="' + asset(c, "mark.svg") + '" download>mark</a>' +
+                '<a href="' + asset(c, "mark-mono.svg") + '" download>mono</a>' +
+                '<a href="' + asset(c, "app-icon.svg") + '" download>app-icon</a>' +
+                '<a href="' + asset(c, "lockup-ar.svg") + '" download>AR</a>' +
+                '<a href="' + asset(c, "lockup-en.svg") + '" download>EN</a>' +
+              '</div>' +
+            '</article>'
+          );
+        }).join("");
+      }
+
+      function buildSizeLadder() {
+        var sizes = [16, 24, 32, 48, 96, 192];
+        document.getElementById("sizeLadder").innerHTML = CONCEPTS.map(function (c) {
+          var cells = sizes.map(function (s) {
+            return '<div class="size-cell"><div class="frame">' +
+              imgTag(asset(c, "mark.svg"), { width: s, height: s, alt: "" }) +
+              '</div><div class="label">' + s + '×' + s + '</div></div>';
+          }).join("");
+          return '<div class="card"><h2 style="font-size:1rem;margin:0 0 8px">' + c.name + '</h2><div class="sizes">' + cells + '</div></div>';
+        }).join("");
+      }
+
+      function buildTabs() {
+        document.getElementById("tabs").innerHTML = CONCEPTS.map(function (c) {
+          return (
+            '<div class="sim-browser"><div class="sim-chrome"><div class="dots"><i></i><i></i><i></i></div>' +
+            '<div class="tab">' + imgTag(asset(c, "app-icon.svg"), { alt: "" }) +
+            '<span class="en-only">Mir’ah</span><span class="ar-only">مرآة</span></div></div>' +
+            '<div class="sim-body">' + c.name + ' · 16×16 tab favicon</div></div>'
+          );
+        }).join("");
+      }
+
+      function buildHeaders() {
+        document.getElementById("mobileHeaders").innerHTML = CONCEPTS.map(function (c) {
+          return '<div class="header-sim mobile"><div class="brand">' +
+            imgTag(asset(c, "mark.svg"), { alt: "" }) +
+            '<span class="en-only">Mir’ah</span><span class="ar-only">مرآة</span></div><div class="burger"></div></div>';
+        }).join("");
+        document.getElementById("desktopHeaders").innerHTML = CONCEPTS.map(function (c) {
+          return '<div class="header-sim desktop"><div class="brand">' +
+            imgTag(asset(c, "mark.svg"), { alt: "" }) +
+            '<span class="en-only">Mir’ah</span><span class="ar-only">مرآة</span></div>' +
+            '<div class="nav en-only"><span>Compare</span><span>Passports</span><span>About</span></div>' +
+            '<div class="nav ar-only"><span>مقارنة</span><span>جوازات</span><span>حول</span></div></div>';
+        }).join("");
+      }
+
+      function buildSocial() {
+        document.getElementById("socialRow").innerHTML = CONCEPTS.map(function (c) {
+          return '<div class="card" style="align-items:center"><div class="tag">' + c.name +
+            '</div><div class="social">' + imgTag(asset(c, "app-icon.svg"), { alt: c.name }) +
+            '</div></div>';
+        }).join("");
+      }
+
+      function buildTests() {
+        ["testColor", "testGray", "testOne"].forEach(function (id) {
+          document.getElementById(id).innerHTML = CONCEPTS.map(function (c) {
+            return imgTag(asset(c, "mark.svg"), { width: 48, height: 48, alt: c.name });
+          }).join("");
+        });
+      }
+
+      function syncLockups() {
+        var t = theme();
+        CONCEPTS.forEach(function (c) {
+          var card = document.querySelector('[data-concept="' + c.id + '"]');
+          if (!card) return;
+          var ar = card.querySelector("[data-lockup-ar]");
+          var en = card.querySelector("[data-lockup-en]");
+          if (ar) ar.src = asset(c, t === "light" ? "lockup-ar-light.svg" : "lockup-ar.svg");
+          if (en) en.src = asset(c, t === "light" ? "lockup-en-light.svg" : "lockup-en.svg");
+        });
+      }
+
+      function applySize(px) {
+        document.querySelectorAll("[data-role=preview]").forEach(function (img) {
+          img.style.width = px + "px";
+          img.style.height = px + "px";
+        });
+      }
+
+      function setStatus(passed, total, failures) {
+        var checks = document.getElementById("statusChecks");
+        var broken = document.getElementById("statusBroken");
+        var panel = document.getElementById("errorPanel");
+        var list = document.getElementById("errorList");
+        var opinion = document.getElementById("opinionSection");
+        checks.textContent = "Asset checks: " + passed + "/" + total + " passed";
+        broken.textContent = "Broken images: " + failures.length;
+        checks.className = failures.length ? "bad" : "ok";
+        broken.className = failures.length ? "bad" : "ok";
+        if (failures.length) {
+          panel.classList.add("show");
+          list.innerHTML = failures.map(function (f) { return "<li>" + f + "</li>"; }).join("");
+          opinion.hidden = true;
+          document.getElementById("boardRoot").classList.add("board-hidden");
+        } else {
+          panel.classList.remove("show");
+          list.innerHTML = "";
+          document.getElementById("boardRoot").classList.remove("board-hidden");
+          opinion.hidden = false;
+          document.getElementById("opinionText").innerHTML =
+            "<strong style=\"color:var(--text)\">Recommended to explore next: Reflected M</strong> — clearest brand letter cue with a reflective split, strongest favicon silhouette, and modern sans lockups. " +
+            "Data Mirror best communicates country/data comparison. Mirror Portal is the premium large-size alternative.";
+        }
+      }
+
+      function validateAssets() {
+        var failures = [];
+        var passed = 0;
+        var total = ASSETS.length;
+        document.getElementById("statusChecks").textContent = "Asset checks: running…";
+        document.getElementById("statusChecks").className = "pending";
+        document.getElementById("statusBroken").textContent = "Broken images: …";
+        document.getElementById("statusBroken").className = "pending";
+
+        return Promise.all(ASSETS.map(function (src) {
+          return fetch(src, { cache: "no-store" }).then(function (res) {
+            if (!res.ok) {
+              failures.push(src + " → HTTP " + res.status);
+              return;
+            }
+            return res.text().then(function (text) {
+              if (/[\x00-\x08\x0B\x0C\x0E-\x1F]/.test(text)) {
+                failures.push(src + " → illegal XML control characters");
+                return;
+              }
+              if (!/viewBox\s*=/.test(text)) {
+                failures.push(src + " → missing viewBox");
+                return;
+              }
+              try {
+                var doc = new DOMParser().parseFromString(text, "image/svg+xml");
+                if (doc.querySelector("parsererror")) {
+                  failures.push(src + " → SVG parse error");
+                  return;
+                }
+              } catch (e) {
+                failures.push(src + " → " + e.message);
+                return;
+              }
+              passed += 1;
+            });
+          }).catch(function (e) {
+            failures.push(src + " → " + e.message);
+          });
+        })).then(function () {
+          // Also verify rendered <img> elements
+          var imgs = Array.prototype.slice.call(document.querySelectorAll("#boardRoot img"));
+          imgs.forEach(function (img) {
+            total += 1;
+            if (!img.complete) return;
+            if (img.naturalWidth === 0) {
+              failures.push((img.currentSrc || img.src) + " → broken <img> (naturalWidth 0)");
+              img.classList.add("broken-placeholder");
+            } else {
+              passed += 1;
+              img.classList.remove("broken-placeholder");
+            }
+          });
+          // Wait for pending images
+          var pending = imgs.filter(function (img) { return !img.complete; });
+          if (!pending.length) {
+            setStatus(passed, Math.max(total, ASSETS.length), failures);
+            return;
+          }
+          return Promise.all(pending.map(function (img) {
+            return new Promise(function (resolve) {
+              img.onload = function () {
+                passed += 1;
+                img.classList.remove("broken-placeholder");
+                resolve();
+              };
+              img.onerror = function () {
+                failures.push((img.currentSrc || img.src) + " → <img> error");
+                img.classList.add("broken-placeholder");
+                resolve();
+              };
+            });
+          })).then(function () {
+            setStatus(passed, Math.max(total, ASSETS.length), failures);
+          });
+        });
+      }
+
+      document.querySelectorAll("[data-set-lang]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          document.querySelectorAll("[data-set-lang]").forEach(function (b) { b.classList.remove("active"); });
+          btn.classList.add("active");
+          body.setAttribute("data-lang", btn.getAttribute("data-set-lang"));
+          body.setAttribute("dir", btn.getAttribute("data-set-lang") === "ar" ? "rtl" : "ltr");
+        });
+      });
+
+      document.querySelectorAll("[data-set-theme]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          document.querySelectorAll("[data-set-theme]").forEach(function (b) { b.classList.remove("active"); });
+          btn.classList.add("active");
+          document.documentElement.classList.toggle("light", btn.getAttribute("data-set-theme") === "light");
+          syncLockups();
+          validateAssets();
+        });
+      });
+
+      sizeSelect.addEventListener("change", function () {
+        applySize(Number(sizeSelect.value));
+      });
+
+      document.getElementById("revalidate").addEventListener("click", function () {
+        validateAssets();
+      });
+
+      buildConcepts();
+      buildSizeLadder();
+      buildTabs();
+      buildHeaders();
+      buildSocial();
+      buildTests();
+      applySize(Number(sizeSelect.value));
+      syncLockups();
+      validateAssets();
+    })();
+  </script>
+</body>
+</html>

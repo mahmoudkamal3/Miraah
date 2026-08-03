@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Mir&#8217;ah Data Mirror mark">
+  <defs>
+    <linearGradient id="dmL" x1="8" y1="12" x2="30" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4AE0C0"/>
+      <stop offset="100%" stop-color="#2B9FFF"/>
+    </linearGradient>
+    <linearGradient id="dmR" x1="34" y1="12" x2="56" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38D6B0"/>
+      <stop offset="100%" stop-color="#1A6FD4"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#dmL)" d="M28.5 32c0 8.2-5.4 14.2-14 16.2-1.3.3-2.5-.7-2.5-2V17.8c0-1.3 1.2-2.3 2.5-2 8.6 2 14 8 14 16.2z"/>
+  <path fill="url(#dmR)" d="M35.5 32c0 8.2 5.4 14.2 14 16.2 1.3.3 2.5-.7 2.5-2V17.8c0-1.3-1.2-2.3-2.5-2-8.6 2-14 8-14 16.2z"/>
+  <circle cx="32" cy="32" r="5.2" fill="#7EE7D0"/>
+  <circle cx="32" cy="32" r="2.2" fill="#07111F" opacity=".28"/>
+</svg>
