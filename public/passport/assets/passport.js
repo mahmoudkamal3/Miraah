@@ -60,13 +60,15 @@ const MiraahNavI18n={
     compareSources:'مقارنة الدول: البنك الدولي (مؤشرات التنمية العالمية) وتقرير السعادة العالمي.',
     passportSources:'جواز السفر: Passport Index Data — مجموعة معلوماتية تجريبية. تحقق من المتطلبات مع السفارة أو شركة الطيران أو جهة رسمية قبل السفر.',
     disclaimer:'مرآة منصة معلوماتية وليست جهة حكومية أو استشارية للسفر.',
-    methodology:'منهجية جواز السفر',attributions:'إسناد صور الجوازات'},
+    methodology:'منهجية جواز السفر',attributions:'إسناد صور الجوازات',
+    creditMid:' — صُممت وطُوّرت بواسطة ',creatorName:'محمود كمال',creatorAria:'محمود كمال على LinkedIn'},
   en:{home:'Home',compare:'Compare countries',passport:'Passport power',navLabel:'Primary',menuOpen:'Open menu',menuClose:'Close menu',brandHome:'Back to homepage',explore:'Explore',sources:'Sources',
     footerDesc:'A bilingual data platform for comparing quality of life and passport mobility with disclosed sources.',
     compareSources:'Country comparison: World Bank World Development Indicators and the World Happiness Report.',
     passportSources:'Passport: Passport Index Data — an experimental informational dataset. Verify requirements with an embassy, airline, or official authority before travel.',
     disclaimer:'Mir’ah is informational and is not a government or travel-advisory body.',
-    methodology:'Passport methodology',attributions:'Passport image attributions'}
+    methodology:'Passport methodology',attributions:'Passport image attributions',
+    creditMid:' — Created by ',creatorName:'Mahmoud Kamal',creatorAria:'Mahmoud Kamal on LinkedIn'}
 };
 function syncPlatformChrome(lang){
   const t=MiraahNavI18n[lang==='en'?'en':'ar'];
@@ -85,6 +87,10 @@ function syncPlatformChrome(lang){
   set('footerCompareSources',t.compareSources);set('footerPassportSources',t.passportSources);
   set('footerDisclaimer',t.disclaimer);
   set('footerMethodLink',t.methodology);set('footerAttrLink',t.attributions);
+  set('footerCreditMid',t.creditMid);
+  set('footerCreatorName',t.creatorName);
+  const creator=document.getElementById('footerCreatorLink');
+  if(creator)creator.setAttribute('aria-label',t.creatorAria);
   if(typeof syncThemeControls==='function')syncThemeControls();
 }
 function initPlatformNav(){

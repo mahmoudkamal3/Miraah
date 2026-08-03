@@ -53,35 +53,7 @@ BODY = r'''
     <section class="panel"><div class="panel-head"><h4 id="rankingTitle"></h4><select class="metric-select" id="rankMetric"></select></div><div class="table-wrap"><table><thead><tr id="tableHead"></tr></thead><tbody id="rankingBody"></tbody></table></div></section>
   </div>
   <p class="source"><strong id="freshness"></strong><br><span id="sourceText"></span></p>
-  <footer class="platform-footer" id="platformFooter">
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <img src="/assets/brand/miraah-app-icon.svg" width="40" height="40" alt="" decoding="async">
-      <div>
-        <strong id="footerBrandName"></strong>
-        <p id="footerDesc" style="margin:0"></p>
-      </div>
-    </div>
-    <div>
-      <strong id="footerExploreLabel"></strong>
-      <ul>
-        <li><a href="/" id="footerHome"></a></li>
-        <li><a href="/compare/" id="footerCompare"></a></li>
-        <li><a href="/passport/" id="footerPassport"></a></li>
-        <li><a href="/passport/" id="footerMethodLink"></a></li><li><a href="/passport/image-attributions.html" id="footerAttrLink"></a></li>
-      </ul>
-    </div>
-    <div>
-      <strong id="footerSourcesLabel"></strong>
-      <p id="footerCompareSources" style="margin:0 0 10px"></p>
-      <p id="footerPassportSources" style="margin:0"></p>
-    </div>
-  </div>
-  <div class="footer-copy">
-    <p id="footerDisclaimer" style="margin:0 0 8px"></p>
-    <p style="margin:0"><span id="footerBrandInline"></span> · <span id="footerYear">2026</span></p>
-  </div>
-</footer>
+  ''' + chrome.footer_html() + r'''
 </div><div class="tooltip" id="tooltip"></div>
 '''
 

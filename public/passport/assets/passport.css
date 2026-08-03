@@ -105,6 +105,10 @@ html[data-theme="light"] .theme-btn .icon-moon{display:block}
 .platform-footer a:hover,.platform-footer a:focus-visible{text-decoration:underline}
 .platform-footer ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
 .platform-footer .footer-copy{margin-top:22px;padding-top:14px;border-top:1px solid var(--border);font-size:12px}
+.platform-footer .footer-credit{margin:0}
+.platform-footer .footer-creator{display:inline-flex;align-items:center;gap:5px;vertical-align:baseline;color:var(--brand-cyan);text-decoration:none}
+.platform-footer .footer-creator:hover,.platform-footer .footer-creator:focus-visible{text-decoration:underline}
+.platform-footer .footer-linkedin-icon{width:14px;height:14px;flex-shrink:0;display:block}
 @media(max-width:820px){
   .nav-toggle{display:inline-flex;align-items:center;justify-content:center}
   .product-nav{display:none;width:100%;order:5;flex-direction:column;padding:8px;border-radius:14px}
